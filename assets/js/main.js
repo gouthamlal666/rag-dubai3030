@@ -117,7 +117,6 @@
     const DURATION = 5500;
     const fallback = 'assets/img/gallery/RAG00578.webp';
     const img = (s, i) => `<img src="${esc(s.image)}" alt="" class="hs-slide ${i === 0 ? 'is-active' : ''}" ${i ? 'loading="lazy"' : ''} onerror="this.onerror=null;this.src='${fallback}'" />`;
-    $('#heroSlides').innerHTML = slides.map(img).join('');
     $('#heroBg').innerHTML = slides.map(img).join('');
     $('#heroBars').innerHTML = slides.map((_, i) => `<button type="button" class="hs-bar" data-goto="${i}" aria-label="Slide ${i + 1}"><span></span></button>`).join('');
 
@@ -131,7 +130,7 @@
         const tag = i === 0 ? 'h1 id="heroTitle"' : 'h2';
         return `
         <div class="hero-copy-item ${i === current ? 'is-active' : ''}" ${i === current ? '' : 'aria-hidden="true"'}>
-          <${tag} class="font-display text-[2.4rem] font-extrabold uppercase italic leading-[1] sm:text-6xl lg:text-[4.1rem]">${isAr() ? s.headingAr || s.heading : s.heading}</${tag.split(' ')[0]}>
+          <${tag} class="font-display text-[2.4rem] font-extrabold uppercase italic leading-[1] sm:text-6xl lg:text-[4.9rem]">${isAr() ? s.headingAr || s.heading : s.heading}</${tag.split(' ')[0]}>
           <p class="${i === 0 ? 'hero-fade ' : ''}mt-6 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">${isAr() ? s.leadAr || s.lead : s.lead}</p>
         </div>`;
       }).join('');
@@ -150,7 +149,8 @@
     function go(i) {
       current = (i + slides.length) % slides.length;
       progress = 0;
-      ['#heroSlides', '#heroBg'].forEach((sel) => $$(`${sel} .hs-slide`).forEach((el, n) => el.classList.toggle('is-active', n === current)));
+      $$('#heroBg .hs-slide').forEach((el, n) => el.classList.toggle('is-active', n === current));
+      $('#heroCount').textContent = `${String(current + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
       fills.forEach((f, n) => { f.style.width = n < current ? '100%' : '0%'; });
       $$('#heroCopy .hero-copy-item').forEach((el, n) => {
         el.classList.toggle('is-active', n === current);
@@ -176,8 +176,9 @@
     card.addEventListener('mouseenter', () => { paused = true; });
     card.addEventListener('mouseleave', () => { paused = false; });
     let tx = null;
-    card.addEventListener('touchstart', (e) => { tx = e.touches[0].clientX; }, { passive: true });
-    card.addEventListener('touchend', (e) => {
+    const hero = $('#home');
+    hero.addEventListener('touchstart', (e) => { tx = e.touches[0].clientX; }, { passive: true });
+    hero.addEventListener('touchend', (e) => {
       if (tx === null) return;
       const dx = e.changedTouches[0].clientX - tx;
       if (Math.abs(dx) > 40) go(current + ((dx < 0) !== isAr() ? 1 : -1));

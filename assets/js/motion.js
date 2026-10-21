@@ -97,25 +97,23 @@
   }
 
   /* ---------------- Intro + hero ---------------- */
-  gsap.set('#header', { yPercent: -120 });
+  gsap.set('#header .nav-shell', { yPercent: -160 });
   const heroWords = splitWords($('#heroTitle'));
   gsap.set(heroWords, { yPercent: 115, rotate: 4 });
   gsap.set('.hero-fade', { y: 30, opacity: 0 });
-  gsap.set('.hero-card', { clipPath: 'inset(100% 0% 0% 0% round 2rem)' });
-  gsap.set('.hero-backplate', { scale: 0.8, opacity: 0 });
-  gsap.set('.float-chip', { scale: 0.6, opacity: 0 });
+  gsap.set('.hero-media', { scale: 1.12, opacity: 0 });
+  gsap.set('#heroEyebrow', { y: 20, opacity: 0 });
 
   const tl = gsap.timeline({ defaults: { ease } });
   tl.fromTo('.intro-logo', { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.7 })
     .to('.intro-logo', { scale: 1.15, opacity: 0, duration: 0.45, ease: 'power2.in' }, '+=0.25')
     .to(intro, { yPercent: -100, duration: 0.9, ease: 'expo.inOut' }, '-=0.15')
     .set(intro, { display: 'none' })
-    .to('#header', { yPercent: 0, duration: 0.9 }, '-=0.5')
+    .to('#header .nav-shell', { yPercent: 0, duration: 0.9 }, '-=0.5')
     .to(heroWords, { yPercent: 0, rotate: 0, duration: 1.1, stagger: 0.06 }, '-=0.75')
-    .to('.hero-card', { clipPath: 'inset(0% 0% 0% 0% round 2rem)', duration: 1.3, ease: 'expo.out' }, '-=1')
-    .to('.hero-backplate', { scale: 1, opacity: 0.8, duration: 1.1 }, '-=1.1')
-    .to('.hero-fade', { y: 0, opacity: 1, duration: 0.9, stagger: 0.12 }, '-=0.9')
-    .to('.float-chip', { scale: 1, opacity: 1, duration: 0.7, stagger: 0.12, ease: 'back.out(1.7)', clearProps: 'transform' }, '-=0.7');
+    .to('.hero-media', { scale: 1, opacity: 1, duration: 1.8, ease: 'expo.out' }, '-=1.1')
+    .to('#heroEyebrow', { y: 0, opacity: 1, duration: 0.8, clearProps: 'all' }, '-=1.5')
+    .to('.hero-fade', { y: 0, opacity: 1, duration: 0.9, stagger: 0.12 }, '-=1.1');
 
   // Hero content drifts and fades as you scroll away.
   gsap.to('.hero-title', { yPercent: -18, opacity: 0.25, ease: 'none', scrollTrigger: { trigger: '#home', start: 'top top', end: 'bottom top', scrub: true } });

@@ -127,7 +127,7 @@ section[id] { scroll-margin-top: 96px; }
   -webkit-mask-image: radial-gradient(ellipse at 30% 40%, #000 20%, transparent 70%);
 }
 .hero-bg .hs-slide { opacity: 0; }
-.hero-bg .hs-slide.is-active { opacity: .32; }
+.hero-bg .hs-slide.is-active { opacity: 1; }
 .hs-slide {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
   opacity: 0; transform: scale(1.12);
