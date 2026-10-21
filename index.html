@@ -11,8 +11,9 @@
   <meta property="og:description" content="30 minutes. 30 days. Free sessions at RAG Biz HQ, Sheikh Zayed Road." />
   <meta property="og:image" content="assets/img/gallery/RAG00584.webp" />
   <link rel="icon" href="assets/img/rag-logo.webp" />
-  <link rel="preload" href="assets/fonts/Dubai-Bold.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="preload" href="assets/fonts/Dubai-Regular.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600;1,700;1,800&display=swap" rel="stylesheet" />
 
   <script src="https://cdn.tailwindcss.com/3.4.16"></script>
   <script>
@@ -24,8 +25,8 @@
             gold: { 200: '#F8E7B5', 300: '#F1D58A', 400: '#E5BF66', 500: '#D4A84B', 600: '#B8862F', 700: '#8F6620' },
           },
           fontFamily: {
-            sans: ['Dubai', '-apple-system', 'system-ui', '"Segoe UI"', 'Roboto', 'Arial', 'sans-serif'],
-            display: ['Dubai', '-apple-system', 'system-ui', '"Segoe UI"', 'Roboto', 'Arial', 'sans-serif'],
+            sans: ['Montserrat', 'Dubai', '-apple-system', 'system-ui', '"Segoe UI"', 'Roboto', 'Arial', 'sans-serif'],
+            display: ['Montserrat', 'Dubai', '-apple-system', 'system-ui', '"Segoe UI"', 'Roboto', 'Arial', 'sans-serif'],
           },
           boxShadow: {
             gold: '0 10px 40px -10px rgba(212,168,75,.55)',
@@ -64,6 +65,7 @@
           <li><a href="#schedule" class="nav-link" data-i18n="nav.schedule">Schedule</a></li>
           <li><a href="#gallery" class="nav-link" data-i18n="nav.gallery">Gallery</a></li>
           <li><a href="#faq" class="nav-link" data-i18n="nav.faq">FAQ</a></li>
+          <li><a href="#contact" class="nav-link" data-i18n="nav.contact">Contact</a></li>
         </ul>
 
         <div class="flex items-center gap-2">
@@ -72,10 +74,10 @@
             <button type="button" class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
             <button type="button" class="lang-btn font-medium" data-lang="ar" aria-pressed="false" lang="ar">عربي</button>
           </div>
-          <a href="#register" class="btn-gold hidden sm:inline-flex">
-            <span data-i18n="btn.join">Join Free</span>
+          <button type="button" class="btn-gold hidden sm:inline-flex" data-open-contact>
+            <span data-i18n="btn.contact">Contact Us</span>
             <svg class="flip-rtl h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
+          </button>
           <button id="menuBtn" class="grid h-11 w-11 place-items-center rounded-xl border border-white/10 bg-white/5 lg:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
             <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
           </button>
@@ -101,8 +103,9 @@
         <li><a href="#schedule" class="mobile-link" data-i18n="nav.schedule">Schedule</a></li>
         <li><a href="#gallery" class="mobile-link" data-i18n="nav.gallery">Gallery</a></li>
         <li><a href="#faq" class="mobile-link" data-i18n="nav.faq">FAQ</a></li>
+        <li><a href="#contact" class="mobile-link" data-i18n="nav.contact">Contact</a></li>
       </ul>
-      <a href="#register" class="btn-gold mobile-link mt-auto justify-center py-4 text-base" data-i18n="cta.reserveFree">Reserve your free spot</a>
+      <button type="button" class="btn-gold mobile-link mt-auto justify-center py-4 text-base" data-open-contact data-i18n="btn.contact">Contact Us</button>
       <p class="mt-4 text-center text-xs text-white/50" data-i18n="menu.dates">31 Oct – 29 Nov 2026 · Sheikh Zayed Road</p>
     </div>
   </div>
@@ -122,20 +125,14 @@
 
       <div class="mx-auto grid max-w-7xl items-center gap-12 px-4 pb-20 sm:px-6 lg:grid-cols-12 lg:gap-8 lg:px-8 lg:pb-28">
         <div class="lg:col-span-7">
-          <h1 id="heroTitle" class="hero-title font-display text-[2.9rem] font-bold uppercase italic leading-[.95] sm:text-7xl lg:text-[5.4rem]" data-i18n="hero.title" data-split>
-            What's your <span class="text-gold-gradient">30x30?</span><br />
-            <span class="text-white/90">Start it at</span> <span class="text-gold-gradient">RAG Biz HQ</span>
-          </h1>
-
-          <p class="hero-fade mt-6 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg" data-i18n="hero.lead">
-            30 minutes of activity, 30 days in a row. From <strong class="text-white">31 October to 29 November</strong>, RAG Holdings opens its Biz HQ on Sheikh Zayed Road for free morning and evening sessions — yoga, wellness, pilates, dance and more. Everyone in Dubai is welcome.
-          </p>
+          <!-- Headline + intro change with each hero slide (rendered by main.js) -->
+          <div id="heroCopy" class="hero-title hero-copy" aria-live="polite"></div>
 
           <div class="hero-fade mt-8 flex flex-col gap-3 sm:flex-row">
-            <a href="#register" class="btn-gold magnetic justify-center px-7 py-4 text-base">
-              <span data-i18n="hero.cta1">Reserve a free spot</span>
+            <button type="button" class="btn-gold magnetic justify-center px-7 py-4 text-base" data-open-contact>
+              <span data-i18n="btn.contact">Contact Us</span>
               <svg class="flip-rtl h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
+            </button>
             <a href="#schedule" class="btn-ghost magnetic justify-center px-7 py-4 text-base">
               <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
               <span data-i18n="hero.cta2">View schedule</span>
@@ -420,8 +417,8 @@
         <ol class="mt-14 grid gap-6 md:grid-cols-3" data-stagger>
           <li class="step-card">
             <span class="step-num">01</span>
-            <h3 data-i18n="h.s1">Register free</h3>
-            <p data-i18n="h.s1p">Sign up below in under a minute. No fees, no membership — just your name and number.</p>
+            <h3 data-i18n="h.s1">Get in touch</h3>
+            <p data-i18n="h.s1p">Send us a message below or on WhatsApp — it takes under a minute, and joining is completely free.</p>
           </li>
           <li class="step-card">
             <span class="step-num">02</span>
@@ -454,17 +451,17 @@
       </div>
     </section>
 
-    <!-- ============================== REGISTER ============================== -->
-    <section id="register" class="relative overflow-hidden bg-navy-900 py-20 sm:py-28">
+    <!-- ============================== CONTACT ============================== -->
+    <section id="contact" class="relative overflow-hidden bg-navy-900 py-20 sm:py-28">
       <div class="absolute inset-0">
         <img src="assets/img/gallery/RAG00580.webp" alt="" class="h-[120%] w-full object-cover opacity-15" loading="lazy" data-parallax="0.1" />
         <div class="absolute inset-0 bg-gradient-to-br from-navy-950 via-navy-900/95 to-navy-800/90"></div>
       </div>
       <div class="relative mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
         <div>
-          <p class="eyebrow" data-reveal data-i18n="r.eyebrow">Register</p>
-          <h2 class="mt-3 font-display text-5xl font-bold uppercase italic leading-[.95] sm:text-6xl" data-split data-i18n="r.title">Claim your <span class="text-gold-gradient">free spot</span></h2>
-          <p class="mt-5 max-w-lg text-white/70" data-reveal data-i18n="r.p">Spaces per session are limited. Register once and we'll send you the schedule, reminders and any updates on WhatsApp.</p>
+          <p class="eyebrow" data-reveal data-i18n="c.eyebrow">Contact us</p>
+          <h2 class="mt-3 font-display text-5xl font-bold uppercase italic leading-[.95] sm:text-6xl" data-split data-i18n="c.title">Let's get you <span class="text-gold-gradient">moving</span></h2>
+          <p class="mt-5 max-w-lg text-white/70" data-reveal data-i18n="c.p">Questions about the sessions, a group booking for your team, or partnering with RAG Biz HQ? Send us a message and our team will get back to you within one business day.</p>
 
           <div class="mt-10 space-y-4" data-stagger>
             <a href="https://maps.google.com/?q=Addiyar+Building+Sheikh+Zayed+Road+Dubai" target="_blank" rel="noopener" class="contact-row">
@@ -483,57 +480,58 @@
         </div>
 
         <div data-reveal>
-          <form id="registerForm" class="glass-card rounded-3xl p-6 sm:p-8" novalidate>
+          <form id="contactForm" class="contact-form glass-card rounded-3xl p-6 sm:p-8" novalidate>
             <div class="grid gap-4 sm:grid-cols-2">
               <div class="sm:col-span-2">
-                <label class="field-label" for="r-name" data-i18n="f.name">Full name</label>
-                <input id="r-name" name="name" type="text" autocomplete="name" required class="field" placeholder="Your full name" data-i18n-ph="f.namePh" />
+                <label class="field-label" for="contact-name" data-i18n="f.name">Full name</label>
+                <input id="contact-name" name="name" type="text" autocomplete="name" required class="field" placeholder="Your full name" data-i18n-ph="f.namePh" />
                 <p class="field-error" data-i18n="f.nameErr">Please enter your name.</p>
               </div>
               <div>
-                <label class="field-label" for="r-phone" data-i18n="f.phone">Mobile / WhatsApp</label>
-                <input id="r-phone" name="phone" type="tel" autocomplete="tel" required pattern="[+0-9 \-]{8,}" class="field" placeholder="+971 5X XXX XXXX" dir="ltr" />
+                <label class="field-label" for="contact-phone" data-i18n="f.phone">Mobile / WhatsApp</label>
+                <input id="contact-phone" name="phone" type="tel" autocomplete="tel" required pattern="[+0-9 \-]{8,}" class="field" placeholder="+971 5X XXX XXXX" dir="ltr" />
                 <p class="field-error" data-i18n="f.phoneErr">Please enter a valid number.</p>
               </div>
               <div>
-                <label class="field-label" for="r-email" data-i18n="f.email">Email</label>
-                <input id="r-email" name="email" type="email" autocomplete="email" required class="field" placeholder="you@email.com" dir="ltr" />
+                <label class="field-label" for="contact-email" data-i18n="f.email">Email</label>
+                <input id="contact-email" name="email" type="email" autocomplete="email" required class="field" placeholder="you@email.com" dir="ltr" />
                 <p class="field-error" data-i18n="f.emailErr">Please enter a valid email.</p>
               </div>
-              <div>
-                <label class="field-label" for="r-activity" data-i18n="f.activity">Favourite activity</label>
-                <select id="r-activity" name="activity" class="field"></select>
-              </div>
-              <div>
-                <label class="field-label" for="r-slot" data-i18n="f.slot">Preferred slot</label>
-                <select id="r-slot" name="slot" class="field">
-                  <option value="" data-i18n="f.noPref">No preference</option>
-                  <option value="Morning" data-i18n="f.morning">Morning</option>
-                  <option value="Evening" data-i18n="f.evening">Evening</option>
+              <div class="sm:col-span-2">
+                <label class="field-label" for="contact-topic" data-i18n="f.enquiry">Enquiry type</label>
+                <select id="contact-topic" name="topic" class="field">
+                  <option value="sessions" data-i18n="f.e1">Join the 30x30 sessions</option>
+                  <option value="group" data-i18n="f.e2">Corporate / group booking</option>
+                  <option value="partnership" data-i18n="f.e3">Partnership &amp; sponsorship</option>
+                  <option value="general" data-i18n="f.e4">General enquiry</option>
                 </select>
+              </div>
+              <div class="sm:col-span-2">
+                <label class="field-label" for="contact-message" data-i18n="f.message">Message</label>
+                <textarea id="contact-message" name="message" rows="4" required class="field resize-none" placeholder="How can we help?" data-i18n-ph="f.messagePh"></textarea>
+                <p class="field-error" data-i18n="f.messageErr">Please write your message.</p>
               </div>
               <div class="sm:col-span-2">
                 <label class="flex items-start gap-3 text-sm text-white/70">
                   <input type="checkbox" name="consent" required class="mt-0.5 h-5 w-5 shrink-0 rounded border-white/20 bg-white/10 accent-[#D4A84B]" />
-                  <span data-i18n="f.consent">I agree to receive session updates from RAG Holdings and confirm I'm fit to take part in physical activity.</span>
+                  <span data-i18n="f.consentC">I agree to be contacted by RAG Holdings about my enquiry.</span>
                 </label>
                 <p class="field-error" data-i18n="f.consentErr">Please accept to continue.</p>
               </div>
             </div>
             <button type="submit" class="btn-gold mt-6 w-full justify-center py-4 text-base">
-              <span data-i18n="f.submit">Register for free</span>
-              <svg class="flip-rtl h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              <span data-i18n="f.send">Send message</span>
+              <svg class="flip-rtl h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
             </button>
             <p class="mt-3 text-center text-xs text-white/40" data-i18n="f.privacy">We respect your privacy. No spam, ever.</p>
           </form>
 
-          <div id="registerSuccess" class="glass-card hidden rounded-3xl p-8 text-center sm:p-12">
+          <div id="contactSuccess" class="contact-success glass-card rounded-3xl p-8 sm:p-12 hidden text-center">
             <div class="mx-auto grid h-16 w-16 place-items-center rounded-full bg-gold-500 text-navy-950">
               <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>
             </div>
-            <h3 class="mt-6 font-display text-4xl font-bold uppercase italic" data-i18n="f.ok">You're in!</h3>
-            <p class="mt-3 text-white/70" data-i18n="f.okp">Thanks for joining RAG Biz HQ's 30x30. We'll be in touch with your schedule and reminders.</p>
-            <a href="#schedule" class="btn-gold mt-8 inline-flex" data-i18n="f.browse">Browse sessions</a>
+            <h3 class="mt-6 font-display text-4xl font-bold uppercase italic" data-i18n="f.sent">Message sent!</h3>
+            <p class="mt-3 text-white/70" data-i18n="f.sentp">Thanks for reaching out. Our team will get back to you shortly.</p>
           </div>
         </div>
       </div>
@@ -585,7 +583,7 @@
             <p class="text-sm text-white/50" data-i18n="ft.tag">Building businesses. Enabling growth. Moving Dubai.</p>
           </div>
         </div>
-        <a href="#register" class="btn-gold magnetic px-7 py-4" data-i18n="ft.cta">Join the challenge</a>
+        <button type="button" class="btn-gold magnetic px-7 py-4" data-open-contact data-i18n="btn.contact">Contact Us</button>
       </div>
       <div class="flex flex-col gap-4 py-8 text-sm text-white/50 sm:flex-row sm:items-center sm:justify-between">
         <p data-i18n="ft.rights">© 2026 RAG Holdings. All rights reserved.</p>
@@ -597,7 +595,7 @@
 
   <!-- Mobile sticky CTA -->
   <div id="mobileCta" class="fixed inset-x-0 bottom-0 z-40 translate-y-full border-t border-white/10 bg-navy-950/95 p-3 backdrop-blur-md transition-transform duration-300 sm:hidden">
-    <a href="#register" class="btn-gold w-full justify-center py-3.5" data-i18n="cta.reserveFree">Reserve your free spot</a>
+    <button type="button" class="btn-gold w-full justify-center py-3.5" data-open-contact data-i18n="btn.contact">Contact Us</button>
   </div>
 
   <!-- Back to top -->
@@ -645,6 +643,84 @@
             <button class="underline underline-offset-4 hover:text-white" data-close-modal data-i18n="p.no">No thanks, maybe later</button>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============================== CONTACT POPUP ============================== -->
+  <div id="contactModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-panel max-w-2xl" data-lenis-prevent>
+      <button class="modal-close" data-close-modal aria-label="Close">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <div class="relative overflow-hidden rounded-t-[1.75rem] px-6 pb-6 pt-8 sm:px-8">
+        <img src="assets/img/gallery/RAG00584.webp" alt="" class="absolute inset-0 h-full w-full object-cover opacity-25" />
+        <div class="absolute inset-0 bg-gradient-to-b from-navy-900/40 to-navy-900"></div>
+        <div class="relative">
+          <p class="eyebrow" data-i18n="c.eyebrow">Contact us</p>
+          <h2 id="contactModalTitle" class="mt-2 font-display text-4xl font-bold uppercase italic leading-none sm:text-5xl" data-i18n="m.title">Get in <span class="text-gold-gradient">touch</span></h2>
+          <p class="mt-3 text-sm text-white/70" data-i18n="m.p">We'd love to hear from you — send us a message and we'll reply shortly.</p>
+          <div class="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+            <a href="tel:+971586046586" class="inline-flex items-center gap-2 text-gold-300 hover:text-gold-200" dir="ltr">+971 58 604 6586</a>
+            <a href="mailto:info@ragroup.ae" class="inline-flex items-center gap-2 text-gold-300 hover:text-gold-200">info@ragroup.ae</a>
+          </div>
+        </div>
+      </div>
+      <div class="px-6 pb-8 sm:px-8">
+        <form id="modalForm" class="contact-form " novalidate>
+            <div class="grid gap-4 sm:grid-cols-2">
+              <div class="sm:col-span-2">
+                <label class="field-label" for="modal-name" data-i18n="f.name">Full name</label>
+                <input id="modal-name" name="name" type="text" autocomplete="name" required class="field" placeholder="Your full name" data-i18n-ph="f.namePh" />
+                <p class="field-error" data-i18n="f.nameErr">Please enter your name.</p>
+              </div>
+              <div>
+                <label class="field-label" for="modal-phone" data-i18n="f.phone">Mobile / WhatsApp</label>
+                <input id="modal-phone" name="phone" type="tel" autocomplete="tel" required pattern="[+0-9 \-]{8,}" class="field" placeholder="+971 5X XXX XXXX" dir="ltr" />
+                <p class="field-error" data-i18n="f.phoneErr">Please enter a valid number.</p>
+              </div>
+              <div>
+                <label class="field-label" for="modal-email" data-i18n="f.email">Email</label>
+                <input id="modal-email" name="email" type="email" autocomplete="email" required class="field" placeholder="you@email.com" dir="ltr" />
+                <p class="field-error" data-i18n="f.emailErr">Please enter a valid email.</p>
+              </div>
+              <div class="sm:col-span-2">
+                <label class="field-label" for="modal-topic" data-i18n="f.enquiry">Enquiry type</label>
+                <select id="modal-topic" name="topic" class="field">
+                  <option value="sessions" data-i18n="f.e1">Join the 30x30 sessions</option>
+                  <option value="group" data-i18n="f.e2">Corporate / group booking</option>
+                  <option value="partnership" data-i18n="f.e3">Partnership &amp; sponsorship</option>
+                  <option value="general" data-i18n="f.e4">General enquiry</option>
+                </select>
+              </div>
+              <div class="sm:col-span-2">
+                <label class="field-label" for="modal-message" data-i18n="f.message">Message</label>
+                <textarea id="modal-message" name="message" rows="4" required class="field resize-none" placeholder="How can we help?" data-i18n-ph="f.messagePh"></textarea>
+                <p class="field-error" data-i18n="f.messageErr">Please write your message.</p>
+              </div>
+              <div class="sm:col-span-2">
+                <label class="flex items-start gap-3 text-sm text-white/70">
+                  <input type="checkbox" name="consent" required class="mt-0.5 h-5 w-5 shrink-0 rounded border-white/20 bg-white/10 accent-[#D4A84B]" />
+                  <span data-i18n="f.consentC">I agree to be contacted by RAG Holdings about my enquiry.</span>
+                </label>
+                <p class="field-error" data-i18n="f.consentErr">Please accept to continue.</p>
+              </div>
+            </div>
+            <button type="submit" class="btn-gold mt-6 w-full justify-center py-4 text-base">
+              <span data-i18n="f.send">Send message</span>
+              <svg class="flip-rtl h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            </button>
+            <p class="mt-3 text-center text-xs text-white/40" data-i18n="f.privacy">We respect your privacy. No spam, ever.</p>
+          </form>
+        <div id="modalSuccess" class="contact-success py-6 hidden text-center">
+            <div class="mx-auto grid h-16 w-16 place-items-center rounded-full bg-gold-500 text-navy-950">
+              <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>
+            </div>
+            <h3 class="mt-6 font-display text-4xl font-bold uppercase italic" data-i18n="f.sent">Message sent!</h3>
+            <p class="mt-3 text-white/70" data-i18n="f.sentp">Thanks for reaching out. Our team will get back to you shortly.</p>
+          </div>
       </div>
     </div>
   </div>

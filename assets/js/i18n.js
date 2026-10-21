@@ -74,7 +74,7 @@ window.RAG_I18N = {
 
     'h.eyebrow': 'كيف تشارك',
     'h.title': 'ثلاث خطوات إلى <span class="text-gold-gradient-dark">30×30</span>',
-    'h.s1': 'سجّل مجاناً', 'h.s1p': 'سجّل أدناه في أقل من دقيقة. بلا رسوم أو عضوية — فقط اسمك ورقمك.',
+    'h.s1': 'تواصل معنا', 'h.s1p': 'أرسل لنا رسالة عبر النموذج أدناه أو واتساب — يستغرق الأمر أقل من دقيقة، والانضمام مجاني تماماً.',
     'h.s2': 'اختر جلساتك', 'h.s2p': 'تصفّح التقويم واختر الصباح أو المساء واحجز الحصص التي تحبها.',
     'h.s3': 'احضر وتحرّك', 'h.s3p': 'احضر قبل 10 دقائق إلى RAG Biz HQ بملابس مريحة وزجاجة ماء.',
 
@@ -137,6 +137,26 @@ window.RAG_I18N = {
     'b.okp': 'نراك في RAG Biz HQ! أضف الجلسة إلى تقويمك حتى لا تفوتك.',
     'b.cal': 'أضف إلى التقويم',
     'b.done': 'تم',
+
+    'btn.contact': 'تواصل معنا',
+    'nav.contact': 'تواصل معنا',
+    'c.eyebrow': 'تواصل معنا',
+    'c.title': 'لنبدأ <span class="text-gold-gradient">الحركة معاً</span>',
+    'c.p': 'لديك سؤال عن الجلسات، أو حجز جماعي لفريقك، أو ترغب في الشراكة مع RAG Biz HQ؟ أرسل لنا رسالة وسيتواصل معك فريقنا خلال يوم عمل واحد.',
+    'm.title': 'تواصل <span class="text-gold-gradient">معنا</span>',
+    'm.p': 'يسعدنا سماعك — أرسل لنا رسالة وسنرد عليك قريباً.',
+    'f.enquiry': 'نوع الاستفسار',
+    'f.e1': 'الانضمام إلى جلسات 30×30',
+    'f.e2': 'حجز للشركات أو المجموعات',
+    'f.e3': 'الشراكة والرعاية',
+    'f.e4': 'استفسار عام',
+    'f.message': 'رسالتك',
+    'f.messagePh': 'كيف يمكننا مساعدتك؟',
+    'f.messageErr': 'يرجى كتابة رسالتك.',
+    'f.consentC': 'أوافق على أن تتواصل معي RAG القابضة بخصوص استفساري.',
+    'f.send': 'إرسال الرسالة',
+    'f.sent': 'تم إرسال رسالتك!',
+    'f.sentp': 'شكراً لتواصلك معنا. سيتواصل معك فريقنا قريباً.',
   },
 
   /* Strings built by JavaScript (cards, calendar, countdown, toasts…) */
@@ -177,6 +197,7 @@ window.RAG_I18N = {
       cdDone: 'Thank you for moving with us — see you next year!',
       toastCal: '📅 Calendar file downloaded',
       toastReg: '🎉 Welcome to RAG Biz HQ 30x30!',
+      toastSent: '✅ Message sent — we\'ll be in touch soon.',
       all: 'All',
       categories: {},
     },
@@ -216,6 +237,7 @@ window.RAG_I18N = {
       cdDone: 'شكراً لتحرّكك معنا — نراك العام المقبل!',
       toastCal: '📅 تم تنزيل ملف التقويم',
       toastReg: '🎉 مرحباً بك في تحدي 30×30 في RAG Biz HQ!',
+      toastSent: '✅ تم إرسال رسالتك — سنتواصل معك قريباً.',
       all: 'الكل',
       categories: {
         Reception: 'الاستقبال', Community: 'المجتمع', Lounges: 'الصالات', Recreation: 'الترفيه',

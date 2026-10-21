@@ -74,7 +74,7 @@
       renderSpotlight();
       renderSchedule();
       renderGallery();
-      heroSlider && heroSlider.refreshCaption();
+      if (heroSlider) { heroSlider.renderCopy(); heroSlider.refreshCaption(); }
       tickCountdown && tickCountdown();
       document.dispatchEvent(new CustomEvent('rag:langchange', { detail: { lang } }));
     }
@@ -124,6 +124,19 @@
     let current = 0, progress = 0, paused = false, last = performance.now();
     const fills = $$('#heroBars .hs-bar span');
 
+    // Headline + intro for every slide, stacked in one grid cell so the
+    // tallest one sets the height and swapping never shifts the layout.
+    function renderCopy() {
+      $('#heroCopy').innerHTML = slides.map((s, i) => {
+        const tag = i === 0 ? 'h1 id="heroTitle"' : 'h2';
+        return `
+        <div class="hero-copy-item ${i === current ? 'is-active' : ''}" ${i === current ? '' : 'aria-hidden="true"'}>
+          <${tag} class="font-display text-[2.4rem] font-extrabold uppercase italic leading-[1] sm:text-6xl lg:text-[4.1rem]">${isAr() ? s.headingAr || s.heading : s.heading}</${tag.split(' ')[0]}>
+          <p class="${i === 0 ? 'hero-fade ' : ''}mt-6 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">${isAr() ? s.leadAr || s.lead : s.lead}</p>
+        </div>`;
+      }).join('');
+    }
+
     function refreshCaption() {
       const s = slides[current];
       const eb = $('#heroEyebrow'), cap = $('#heroCaption');
@@ -139,6 +152,10 @@
       progress = 0;
       ['#heroSlides', '#heroBg'].forEach((sel) => $$(`${sel} .hs-slide`).forEach((el, n) => el.classList.toggle('is-active', n === current)));
       fills.forEach((f, n) => { f.style.width = n < current ? '100%' : '0%'; });
+      $$('#heroCopy .hero-copy-item').forEach((el, n) => {
+        el.classList.toggle('is-active', n === current);
+        n === current ? el.removeAttribute('aria-hidden') : el.setAttribute('aria-hidden', 'true');
+      });
       refreshCaption();
     }
     function frame(now) {
@@ -167,9 +184,10 @@
       tx = null;
     });
 
+    renderCopy();
     go(0);
     requestAnimationFrame(frame);
-    heroSlider = { go, refreshCaption };
+    heroSlider = { go, refreshCaption, renderCopy };
   }
 
   /* ------------------------------------------------------------------ *
@@ -262,9 +280,6 @@
     $('#statusFilter').innerHTML = `<option value="all">${esc(ui('anyStatus'))}</option>` +
       Object.keys(CFG.statuses).map((k) => `<option value="${esc(k)}">${esc(statusLabel(k))}</option>`).join('');
     $('#statusFilter').value = state.status;
-    const ra = $('#r-activity'); const keep = ra.value;
-    ra.innerHTML = `<option value="">${esc(ui('anyActivity'))}</option>` + activityNames.map((a) => `<option value="${esc(a)}">${esc(activityLabel(a))}</option>`).join('');
-    ra.value = keep;
   }
 
   function renderLegend() {
@@ -550,7 +565,7 @@
 
   function validate(form) {
     let ok = true;
-    $$('input[required], select[required]', form).forEach((inp) => {
+    $$('input[required], select[required], textarea[required]', form).forEach((inp) => {
       const valid = inp.type === 'checkbox' ? inp.checked : inp.checkValidity() && inp.value.trim() !== '';
       const wrap = inp.closest('div') || inp.parentElement;
       inp.classList.toggle('has-error', !valid);
@@ -619,15 +634,26 @@
     setTimeout(() => closeModal($('#promo')), 2600);
   });
 
-  $('#registerForm').addEventListener('submit', (e) => {
+  // Contact forms (section + popup) and every "Contact Us" button
+  $$('.contact-form').forEach((form) => form.addEventListener('submit', (e) => {
     e.preventDefault();
-    if (!validate(e.target)) return;
-    // TODO: send registration to your backend / CRM here.
+    if (!validate(form)) return;
+    // TODO: send the enquiry to your backend / CRM / email service here.
     store.set('rag3030-registered', true);
-    store.set('rag3030-profile', { name: $('#r-name').value.trim(), phone: $('#r-phone').value.trim() });
-    e.target.classList.add('hidden');
-    $('#registerSuccess').classList.remove('hidden');
-    toast(ui('toastReg'));
+    store.set('rag3030-profile', { name: $('[name=name]', form).value.trim(), phone: $('[name=phone]', form).value.trim() });
+    form.classList.add('hidden');
+    form.nextElementSibling.classList.remove('hidden');
+    toast(ui('toastSent'));
+  }));
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('[data-open-contact]')) return;
+    e.preventDefault();
+    const modal = $('#contactModal');
+    if (!$('#modalSuccess').classList.contains('hidden')) $('#modalForm').reset(); // fresh form after a sent message
+    $('#modalForm').classList.remove('hidden');
+    $('#modalSuccess').classList.add('hidden');
+    $$('.modal.is-open').forEach(closeModal);
+    openModal(modal);
   });
 
   /* ------------------------------------------------------------------ *
@@ -748,7 +774,7 @@
       const h = document.documentElement.scrollHeight - innerHeight;
       progress.style.width = `${h > 0 ? (y / h) * 100 : 0}%`;
       toTop.classList.toggle('is-show', y > 800);
-      const reg = $('#register').getBoundingClientRect();
+      const reg = $('#contact').getBoundingClientRect();
       mobileCta.classList.toggle('is-show', y > $('#home').offsetHeight * 0.7 && !(reg.top < innerHeight && reg.bottom > 0));
     };
     addEventListener('scroll', onScroll, { passive: true }); onScroll();

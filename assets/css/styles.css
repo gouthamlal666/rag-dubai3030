@@ -1,6 +1,6 @@
 /* RAG Biz HQ × Dubai 30x30 — custom styles (plain CSS, works with Tailwind CDN) */
 
-/* ---------- Dubai Font (same family as dubaifitnesschallenge.com; Latin + Arabic) ---------- */
+/* ---------- Fonts: Montserrat (Google Fonts) for Latin; Dubai Font as the Arabic fallback ---------- */
 @font-face { font-family: "Dubai"; src: url("../fonts/Dubai-Light.woff2") format("woff2"); font-weight: 300; font-style: normal; font-display: swap; }
 @font-face { font-family: "Dubai"; src: url("../fonts/Dubai-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: "Dubai"; src: url("../fonts/Dubai-Medium.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
@@ -25,12 +25,13 @@ html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .lenis.lenis-stopped { overflow: hidden; }
 [data-lenis-prevent] { overscroll-behavior: contain; }
-body { overflow-x: hidden; font-family: "Dubai", -apple-system, system-ui, "Segoe UI", Roboto, Arial, sans-serif; }
+body { overflow-x: hidden; font-family: "Montserrat", "Dubai", -apple-system, system-ui, "Segoe UI", Roboto, Arial, sans-serif; }
 body.modal-open { overflow: hidden; }
 section[id] { scroll-margin-top: 96px; }
 
-/* DFC-style headings: bold, italic, uppercase, slightly tight */
-.font-display { letter-spacing: -0.01em; }
+/* DFC-style headings: heavy, italic, uppercase, slightly tight */
+.font-display { letter-spacing: -0.02em; }
+.font-display.font-bold { font-weight: 800; }
 
 /* ---------- RTL / Arabic ---------- */
 [dir="rtl"] body { line-height: 1.75; }
@@ -138,6 +139,18 @@ section[id] { scroll-margin-top: 96px; }
 .hs-bar span { position: absolute; inset-block: 0; inset-inline-start: 0; width: 0; background: var(--gold-grad); }
 .hs-btn { display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border-radius: 9999px; background: rgba(2,8,23,.55); border: 1px solid rgba(255,255,255,.2); color: #fff; backdrop-filter: blur(6px); transition: all .25s; }
 .hs-btn:hover { background: var(--gold-500); color: var(--navy-950); border-color: transparent; }
+/* Hero headline/intro swap with each slide (all items share one grid cell) */
+.hero-copy { display: grid; }
+.hero-copy-item {
+  grid-area: 1 / 1; align-self: center;
+  opacity: 0; visibility: hidden; transform: translateY(28px); filter: blur(8px);
+  transition: opacity .55s ease, transform .7s cubic-bezier(.2,.8,.2,1), filter .55s ease, visibility 0s linear .7s;
+}
+.hero-copy-item.is-active {
+  opacity: 1; visibility: visible; transform: none; filter: none;
+  transition: opacity .8s ease .3s, transform .9s cubic-bezier(.2,.8,.2,1) .3s, filter .8s ease .3s, visibility 0s;
+}
+
 .hs-caption { opacity: 0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease; }
 .hs-caption.is-in { opacity: 1; transform: none; }
 #heroCaption.is-in { transition-delay: .08s; }
