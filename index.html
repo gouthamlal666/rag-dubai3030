@@ -1,0 +1,721 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RAG Biz HQ × Dubai Fitness Challenge 30x30</title>
+  <meta name="description" content="Join free daily fitness sessions at RAG Biz HQ for the Dubai Fitness Challenge 30x30 — yoga, wellness, pilates and more from 31 October to 29 November 2026." />
+  <meta name="theme-color" content="#061230" />
+  <script>if ('scrollRestoration' in history) history.scrollRestoration = 'manual';</script>
+  <meta property="og:title" content="RAG Biz HQ × Dubai 30x30" />
+  <meta property="og:description" content="30 minutes. 30 days. Free sessions at RAG Biz HQ, Sheikh Zayed Road." />
+  <meta property="og:image" content="assets/img/gallery/RAG00584.webp" />
+  <link rel="icon" href="assets/img/rag-logo.webp" />
+  <link rel="preload" href="assets/fonts/Dubai-Bold.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/Dubai-Regular.woff2" as="font" type="font/woff2" crossorigin />
+
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: { 950: '#020817', 900: '#061230', 850: '#081838', 800: '#0B1F45', 700: '#10295C', 600: '#173576' },
+            gold: { 200: '#F8E7B5', 300: '#F1D58A', 400: '#E5BF66', 500: '#D4A84B', 600: '#B8862F', 700: '#8F6620' },
+          },
+          fontFamily: {
+            sans: ['Dubai', '-apple-system', 'system-ui', '"Segoe UI"', 'Roboto', 'Arial', 'sans-serif'],
+            display: ['Dubai', '-apple-system', 'system-ui', '"Segoe UI"', 'Roboto', 'Arial', 'sans-serif'],
+          },
+          boxShadow: {
+            gold: '0 10px 40px -10px rgba(212,168,75,.55)',
+            card: '0 20px 60px -20px rgba(2,8,23,.65)',
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+
+<body class="bg-navy-950 font-sans text-white antialiased selection:bg-gold-500 selection:text-navy-950">
+
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-gold-500 focus:px-4 focus:py-2 focus:text-navy-950">Skip to content</a>
+
+  <!-- Scroll progress -->
+  <div id="progress" class="fixed left-0 top-0 z-[60] h-[3px] w-0 bg-gradient-to-r from-gold-600 via-gold-300 to-gold-500 rtl:left-auto rtl:right-0"></div>
+
+  <!-- Intro curtain -->
+  <div id="intro" class="pointer-events-none fixed inset-0 z-[95] grid place-items-center bg-navy-950">
+    <img src="assets/img/rag-logo.webp" alt="" class="intro-logo h-24 w-24" />
+  </div>
+
+  <!-- ============================== HEADER ============================== -->
+  <header id="header" class="fixed inset-x-0 top-0 z-50 transition-all duration-300">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <nav class="nav-shell mt-3 flex items-center justify-between rounded-2xl px-4 py-2.5 sm:px-5" aria-label="Main">
+        <a href="#home" class="flex items-center" aria-label="RAG Holdings — home">
+          <img src="assets/img/rag-logo.webp" alt="RAG Holdings" class="h-11 w-11 sm:h-12 sm:w-12" width="48" height="48" />
+        </a>
+
+        <ul class="hidden items-center gap-1 lg:flex">
+          <li><a href="#about-rag" class="nav-link" data-i18n="nav.about">About RAG</a></li>
+          <li><a href="#about-3030" class="nav-link" data-i18n="nav.3030">Dubai 30x30</a></li>
+          <li><a href="#schedule" class="nav-link" data-i18n="nav.schedule">Schedule</a></li>
+          <li><a href="#gallery" class="nav-link" data-i18n="nav.gallery">Gallery</a></li>
+          <li><a href="#faq" class="nav-link" data-i18n="nav.faq">FAQ</a></li>
+        </ul>
+
+        <div class="flex items-center gap-2">
+          <!-- Language switch -->
+          <div class="lang-switch" role="group" aria-label="Language">
+            <button type="button" class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
+            <button type="button" class="lang-btn font-medium" data-lang="ar" aria-pressed="false" lang="ar">عربي</button>
+          </div>
+          <a href="#register" class="btn-gold hidden sm:inline-flex">
+            <span data-i18n="btn.join">Join Free</span>
+            <svg class="flip-rtl h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <button id="menuBtn" class="grid h-11 w-11 place-items-center rounded-xl border border-white/10 bg-white/5 lg:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+          </button>
+        </div>
+      </nav>
+    </div>
+
+  </header>
+
+    <!-- Mobile menu -->
+  <div id="mobileMenu" class="pointer-events-none fixed inset-0 z-50 opacity-0 transition-opacity duration-300 lg:hidden" aria-hidden="true">
+    <div class="absolute inset-0 bg-navy-950/80 backdrop-blur-sm" data-close-menu></div>
+    <div class="menu-panel absolute top-0 flex h-full w-[86%] max-w-sm flex-col bg-gradient-to-b from-navy-800 to-navy-950 p-6 transition-transform duration-300 ltr:right-0 ltr:translate-x-full rtl:left-0 rtl:-translate-x-full" data-lenis-prevent>
+      <div class="flex items-center justify-between">
+        <img src="assets/img/rag-logo.webp" alt="RAG Holdings" class="h-11 w-11" />
+        <button class="grid h-11 w-11 place-items-center rounded-xl border border-white/10" data-close-menu aria-label="Close menu">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <ul class="mt-10 space-y-1 font-display text-3xl font-bold uppercase italic">
+        <li><a href="#about-rag" class="mobile-link" data-i18n="nav.about">About RAG</a></li>
+        <li><a href="#about-3030" class="mobile-link" data-i18n="nav.3030">Dubai 30x30</a></li>
+        <li><a href="#schedule" class="mobile-link" data-i18n="nav.schedule">Schedule</a></li>
+        <li><a href="#gallery" class="mobile-link" data-i18n="nav.gallery">Gallery</a></li>
+        <li><a href="#faq" class="mobile-link" data-i18n="nav.faq">FAQ</a></li>
+      </ul>
+      <a href="#register" class="btn-gold mobile-link mt-auto justify-center py-4 text-base" data-i18n="cta.reserveFree">Reserve your free spot</a>
+      <p class="mt-4 text-center text-xs text-white/50" data-i18n="menu.dates">31 Oct – 29 Nov 2026 · Sheikh Zayed Road</p>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <!-- ============================== HERO ============================== -->
+    <section id="home" class="relative isolate overflow-hidden pt-28 sm:pt-32">
+      <!-- Background slider (synced with the card slider) -->
+      <div class="absolute inset-0 -z-10">
+        <div id="heroBg" class="hero-bg absolute inset-0"></div>
+        <div class="absolute inset-0 bg-gradient-to-br from-navy-950 via-navy-900/95 to-navy-800/80 rtl:bg-gradient-to-bl"></div>
+        <div class="hero-glow absolute -left-40 top-20 h-96 w-96 rounded-full bg-gold-500/20 blur-[120px]"></div>
+        <div class="absolute -right-32 bottom-0 h-[28rem] w-[28rem] rounded-full bg-navy-600/60 blur-[120px]"></div>
+        <div class="grid-lines absolute inset-0 opacity-[.07]"></div>
+      </div>
+
+      <div class="mx-auto grid max-w-7xl items-center gap-12 px-4 pb-20 sm:px-6 lg:grid-cols-12 lg:gap-8 lg:px-8 lg:pb-28">
+        <div class="lg:col-span-7">
+          <h1 id="heroTitle" class="hero-title font-display text-[2.9rem] font-bold uppercase italic leading-[.95] sm:text-7xl lg:text-[5.4rem]" data-i18n="hero.title" data-split>
+            What's your <span class="text-gold-gradient">30x30?</span><br />
+            <span class="text-white/90">Start it at</span> <span class="text-gold-gradient">RAG Biz HQ</span>
+          </h1>
+
+          <p class="hero-fade mt-6 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg" data-i18n="hero.lead">
+            30 minutes of activity, 30 days in a row. From <strong class="text-white">31 October to 29 November</strong>, RAG Holdings opens its Biz HQ on Sheikh Zayed Road for free morning and evening sessions — yoga, wellness, pilates, dance and more. Everyone in Dubai is welcome.
+          </p>
+
+          <div class="hero-fade mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="#register" class="btn-gold magnetic justify-center px-7 py-4 text-base">
+              <span data-i18n="hero.cta1">Reserve a free spot</span>
+              <svg class="flip-rtl h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a href="#schedule" class="btn-ghost magnetic justify-center px-7 py-4 text-base">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
+              <span data-i18n="hero.cta2">View schedule</span>
+            </a>
+          </div>
+
+          <!-- Countdown -->
+          <div class="hero-fade mt-10">
+            <p id="countdownLabel" class="text-xs font-medium uppercase tracking-[.25em] text-white/50">Challenge starts in</p>
+            <div id="countdown" class="mt-3 grid max-w-md grid-cols-4 gap-2 sm:gap-3" dir="ltr">
+              <div class="count-box"><span data-cd="d">00</span><small data-i18n="cd.d">Days</small></div>
+              <div class="count-box"><span data-cd="h">00</span><small data-i18n="cd.h">Hours</small></div>
+              <div class="count-box"><span data-cd="m">00</span><small data-i18n="cd.m">Mins</small></div>
+              <div class="count-box"><span data-cd="s">00</span><small data-i18n="cd.s">Secs</small></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero slider card -->
+        <div class="relative lg:col-span-5">
+          <div class="hero-visual relative mx-auto aspect-[4/5] w-full max-w-md" data-parallax="-0.08">
+            <div class="hero-backplate absolute inset-0 rotate-3 rounded-[2rem] bg-gradient-to-br from-gold-300 via-gold-500 to-gold-700 opacity-80 rtl:-rotate-3"></div>
+            <div id="heroSlider" class="hero-card absolute inset-0 overflow-hidden rounded-[2rem] border border-white/10 shadow-card" aria-roledescription="carousel" aria-label="Session highlights">
+              <div id="heroSlides" class="absolute inset-0"></div>
+              <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-950/10 to-navy-950/30"></div>
+
+              <!-- Progress bars -->
+              <div id="heroBars" class="absolute inset-x-5 top-5 z-10 flex gap-1.5"></div>
+
+              <!-- Caption -->
+              <div class="absolute inset-x-0 bottom-0 z-10 p-6 pb-16">
+                <p id="heroEyebrow" class="hs-caption text-xs font-medium uppercase tracking-[.25em] text-gold-300"></p>
+                <p id="heroCaption" class="hs-caption mt-1 font-display text-3xl font-bold uppercase italic leading-none"></p>
+              </div>
+
+              <!-- Controls -->
+              <div class="absolute bottom-5 z-10 flex gap-2 ltr:right-5 rtl:left-5">
+                <button type="button" class="hs-btn" data-hs="prev" aria-label="Previous slide"><svg class="flip-rtl h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></button>
+                <button type="button" class="hs-btn" data-hs="next" aria-label="Next slide"><svg class="flip-rtl h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg></button>
+              </div>
+            </div>
+
+            <div class="float-chip absolute top-10 ltr:-left-4 rtl:-right-4 sm:ltr:-left-10 sm:rtl:-right-10">
+              <span class="grid h-10 w-10 place-items-center rounded-xl bg-gold-500 font-display text-xl font-bold text-navy-950">30</span>
+              <span><b class="block text-sm" data-i18n="chip.days">Days</b><small class="text-white/60" data-i18n="chip.dates">31 Oct – 29 Nov</small></span>
+            </div>
+            <div class="float-chip absolute top-1/2 ltr:-right-3 rtl:-left-3 sm:ltr:-right-8 sm:rtl:-left-8" style="animation-delay:-2s">
+              <span class="grid h-10 w-10 place-items-center rounded-xl bg-white font-display text-xl font-bold text-navy-900">30</span>
+              <span><b class="block text-sm" data-i18n="chip.mins">Minutes</b><small class="text-white/60" data-i18n="chip.aday">a day</small></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Marquee -->
+      <div class="relative border-y border-gold-500/20 bg-gradient-to-r from-gold-600 via-gold-400 to-gold-600 py-3 text-navy-950" dir="ltr">
+        <div id="marquee" class="marquee flex w-max font-display text-xl font-bold uppercase italic sm:text-2xl"></div>
+      </div>
+    </section>
+
+    <!-- ============================== STATS ============================== -->
+    <section class="relative bg-navy-950 py-14">
+      <div class="mx-auto grid max-w-7xl grid-cols-2 gap-4 px-4 sm:px-6 md:grid-cols-4 lg:px-8" data-stagger>
+        <div class="stat-card"><span class="stat-num" data-count="30">0</span><span class="stat-label" data-i18n="stat.days">Days of movement</span></div>
+        <div class="stat-card"><span class="stat-num" data-count="60">0</span><span class="stat-label" data-i18n="stat.slots">Session slots</span></div>
+        <div class="stat-card"><span class="stat-num" id="activityCount">0</span><span class="stat-label" data-i18n="stat.styles">Activity styles</span></div>
+        <div class="stat-card"><span class="stat-num" data-i18n="stat.aed">AED&nbsp;0</span><span class="stat-label" data-i18n="stat.free">Entry — always free</span></div>
+      </div>
+    </section>
+
+    <!-- ============================== ABOUT RAG ============================== -->
+    <section id="about-rag" class="relative overflow-hidden bg-white py-20 text-navy-900 sm:py-28">
+      <div class="absolute top-0 h-full w-1/2 from-gold-200/40 to-transparent ltr:-right-40 ltr:bg-gradient-to-l rtl:-left-40 rtl:bg-gradient-to-r"></div>
+      <div class="relative mx-auto grid max-w-7xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+        <div class="relative order-2 lg:order-1">
+          <div class="grid grid-cols-5 grid-rows-6 gap-3 sm:gap-4">
+            <div class="col-span-3 row-span-4 overflow-hidden rounded-3xl shadow-card" data-clip>
+              <img src="assets/img/gallery/RAG00584.webp" alt="RAG Biz HQ reception" class="h-full w-full object-cover" loading="lazy" />
+            </div>
+            <div class="col-span-2 row-span-3 overflow-hidden rounded-3xl shadow-card" data-clip>
+              <img src="assets/img/gallery/RAG00577.webp" alt="RAG executive lounge" class="h-full w-full object-cover" loading="lazy" />
+            </div>
+            <div class="col-span-2 row-span-3 overflow-hidden rounded-3xl shadow-card" data-clip>
+              <img src="assets/img/gallery/RAG00580.webp" alt="RAG community seating" class="h-full w-full object-cover" loading="lazy" />
+            </div>
+            <div class="col-span-3 row-span-2 flex flex-col justify-center gap-1 rounded-3xl bg-gradient-to-br from-navy-800 to-navy-950 p-4 text-white sm:flex-row sm:items-center sm:justify-start sm:gap-4 sm:p-5" data-reveal>
+              <span class="font-display text-4xl font-bold italic text-gold-gradient sm:text-5xl">2013</span>
+              <span class="text-[11px] leading-snug text-white/70 sm:text-sm" data-i18n="rag.since">Building businesses &amp; enabling growth across the UAE since</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="order-1 lg:order-2">
+          <p class="eyebrow" data-reveal data-i18n="rag.eyebrow">About RAG Holdings</p>
+          <h2 class="mt-3 font-display text-5xl font-bold uppercase italic leading-[.95] sm:text-6xl" data-split data-i18n="rag.title">
+            Building businesses.<br /><span class="text-gold-gradient-dark">Enabling growth.</span>
+          </h2>
+          <p class="mt-6 text-base leading-relaxed text-navy-900/75 sm:text-lg" data-reveal data-i18n="rag.p1">
+            Founded in 2013, <strong class="text-navy-900">RAG Holdings</strong> is one of the UAE's emerging business ecosystems — helping entrepreneurs, startups, SMEs and global enterprises establish, operate and grow. Business setup, corporate services, premium workspaces and strategic advisory, all under one integrated ecosystem.
+          </p>
+          <p class="mt-4 text-base leading-relaxed text-navy-900/75" data-reveal data-i18n="rag.p2">
+            <strong class="text-navy-900">RAG Biz HQ</strong> is our flagship business centre on Sheikh Zayed Road. This November we're turning it into a community fitness space — because healthy people build thriving businesses.
+          </p>
+
+          <div class="mt-8 grid gap-3 sm:grid-cols-3" data-stagger>
+            <div class="value-card">
+              <svg class="h-6 w-6 text-gold-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
+              <h3 data-i18n="rag.m">Mission</h3><p data-i18n="rag.mp">Seamless, accountable pathways for ambitious businesses.</p>
+            </div>
+            <div class="value-card">
+              <svg class="h-6 w-6 text-gold-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+              <h3 data-i18n="rag.v">Vision</h3><p data-i18n="rag.vp">The world's most trusted integrated growth partner.</p>
+            </div>
+            <div class="value-card">
+              <svg class="h-6 w-6 text-gold-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20"/></svg>
+              <h3 data-i18n="rag.val">Value</h3><p data-i18n="rag.valp">We compete on quality, not cost — every single time.</p>
+            </div>
+          </div>
+
+          <a href="https://www.ragroup.ae/" target="_blank" rel="noopener" class="mt-8 inline-flex items-center gap-2 font-bold text-navy-800 underline decoration-gold-500 decoration-2 underline-offset-4 hover:text-gold-700" data-reveal>
+            <span data-i18n="rag.link">Explore the RAG ecosystem</span>
+            <svg class="flip-rtl h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M8 7h9v9"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== ABOUT 30x30 ============================== -->
+    <section id="about-3030" class="relative overflow-hidden bg-gradient-to-b from-navy-900 to-navy-950 py-20 sm:py-28">
+      <div class="absolute left-1/2 top-0 h-px w-2/3 -translate-x-1/2 bg-gradient-to-r from-transparent via-gold-500/60 to-transparent"></div>
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid items-end gap-8 lg:grid-cols-2">
+          <div>
+            <p class="eyebrow" data-reveal data-i18n="d.eyebrow">About Dubai 30x30</p>
+            <h2 class="mt-3 font-display text-5xl font-bold uppercase italic leading-[.95] sm:text-6xl" data-split data-i18n="d.title">
+              Dubai's citywide<br /><span class="text-gold-gradient">fitness movement</span>
+            </h2>
+          </div>
+          <p class="text-base leading-relaxed text-white/70 sm:text-lg" data-reveal data-i18n="d.p">
+            The Dubai Fitness Challenge returns for its 10th edition, inviting everyone in the city to complete 30 minutes of activity every day for 30 days. Whether you're a seasoned athlete or just getting moving, it's the perfect moment to build healthier habits — and RAG Biz HQ is proud to be part of it.
+          </p>
+        </div>
+
+        <div class="mt-14 grid gap-5 md:grid-cols-3" data-stagger>
+          <article class="feature-card">
+            <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg></div>
+            <h3 data-i18n="d.f1">30 minutes a day</h3>
+            <p data-i18n="d.f1p">Commit to just half an hour of movement — a class, a run, a ride or a walk.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg></div>
+            <h3 data-i18n="d.f2">For 30 days</h3>
+            <p data-i18n="d.f2p">From 31 October to 29 November 2026 — make activity part of your everyday routine.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+            <h3 data-i18n="d.f3">For everyone</h3>
+            <p data-i18n="d.f3p">Every age and every fitness level. Bring your colleagues, friends and family.</p>
+          </article>
+        </div>
+
+        <!-- City highlights + RAG banner -->
+        <div class="mt-14 grid gap-6 lg:grid-cols-5">
+          <div class="relative overflow-hidden rounded-3xl border border-white/10 lg:col-span-3" data-reveal>
+            <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1400&q=70" alt="Dubai skyline" class="absolute inset-0 h-[120%] w-full object-cover" loading="lazy" data-parallax="0.12" onerror="this.remove()" />
+            <div class="absolute inset-0 from-navy-950 via-navy-950/85 to-navy-900/40 ltr:bg-gradient-to-r rtl:bg-gradient-to-l"></div>
+            <div class="relative p-6 sm:p-10">
+              <p class="eyebrow" data-i18n="d.hl">DFC 2026 city highlights</p>
+              <ul class="mt-6 space-y-4" data-stagger>
+                <li class="timeline-row"><span class="timeline-date" data-i18n="d.t1d">1 Nov</span><span><b data-i18n="d.t1">Dubai Ride</b><small data-i18n="d.t1s">presented by DP World</small></span></li>
+                <li class="timeline-row"><span class="timeline-date" data-i18n="d.t2d">7–8 Nov</span><span><b data-i18n="d.t2">Dubai Stand Up Paddle</b><small data-i18n="d.t2s">presented by RTA</small></span></li>
+                <li class="timeline-row"><span class="timeline-date" data-i18n="d.t3d">22 Nov</span><span><b data-i18n="d.t3">Dubai Run</b><small data-i18n="d.t3s">Sheikh Zayed Road</small></span></li>
+                <li class="timeline-row"><span class="timeline-date" data-i18n="d.t4d">29 Nov</span><span><b data-i18n="d.t4">Dubai Yoga</b><small data-i18n="d.t4s">presented by MHERO</small></span></li>
+              </ul>
+              <a href="https://www.dubaifitnesschallenge.com/" target="_blank" rel="noopener" class="mt-8 inline-flex items-center gap-2 text-sm font-bold text-gold-300 hover:text-gold-200">
+                <span data-i18n="d.link">Official Dubai Fitness Challenge site</span>
+                <svg class="flip-rtl h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M8 7h9v9"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="flex flex-col justify-between gap-6 rounded-3xl bg-gradient-to-br from-gold-300 via-gold-500 to-gold-700 p-6 text-navy-950 sm:p-10 lg:col-span-2" data-reveal>
+            <div>
+              <p class="text-xs font-bold uppercase tracking-[.25em] text-navy-900/70" data-i18n="d.g.e">Your 30x30 at RAG</p>
+              <h3 class="mt-3 font-display text-4xl font-bold uppercase italic leading-none" data-i18n="d.g.t">Two sessions a day. Zero excuses.</h3>
+              <p class="mt-4 text-sm leading-relaxed text-navy-900/80" data-i18n="d.g.p">Drop in before work or unwind after it. Expert instructors, a premium venue and a community that keeps you showing up.</p>
+            </div>
+            <ul class="space-y-2 text-sm font-bold">
+              <li class="flex items-center gap-2"><svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg><span data-i18n="d.g.b1">Free to join, every session</span></li>
+              <li class="flex items-center gap-2"><svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg><span data-i18n="d.g.b2">Morning &amp; evening slots</span></li>
+              <li class="flex items-center gap-2"><svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg><span data-i18n="d.g.b3">All levels welcome</span></li>
+            </ul>
+            <a href="#schedule" class="inline-flex items-center justify-center gap-2 rounded-xl bg-navy-950 px-5 py-3.5 font-bold text-white transition hover:bg-navy-800" data-i18n="d.g.btn">See the schedule</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== KINETIC TYPE BAND ============================== -->
+    <section class="kinetic relative overflow-hidden bg-navy-950 py-12 sm:py-20" aria-hidden="true">
+      <p class="kinetic-row kinetic-a whitespace-nowrap font-display text-[16vw] font-bold uppercase italic leading-[.85] sm:text-[11vw]" dir="ltr">
+        <span class="text-outline">30 Minutes</span> <span class="text-gold-gradient">·</span> <span class="text-outline" data-i18n="k.mins">30 Minutes</span> <span class="text-gold-gradient">·</span> <span class="text-outline">30 Minutes</span>
+      </p>
+      <p class="kinetic-row kinetic-b whitespace-nowrap font-display text-[16vw] font-bold uppercase italic leading-[.85] sm:text-[11vw]" dir="ltr">
+        <span class="text-gold-gradient">30 Days</span> <span class="text-outline">·</span> <span class="text-gold-gradient" data-i18n="k.days">30 Days</span> <span class="text-outline">·</span> <span class="text-gold-gradient">30 Days</span>
+      </p>
+    </section>
+
+    <!-- ============================== SCHEDULE / CALENDAR ============================== -->
+    <section id="schedule" class="relative bg-navy-950 pb-20 pt-10 sm:pb-28">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p class="eyebrow" data-reveal data-i18n="s.eyebrow">Calendar of sessions</p>
+            <h2 class="mt-3 font-display text-5xl font-bold uppercase italic leading-[.95] sm:text-6xl" data-split data-i18n="s.title">What's on at <span class="text-gold-gradient">RAG Biz HQ</span></h2>
+            <p class="mt-4 max-w-2xl text-white/65" data-reveal data-i18n="s.p">Pick a day, choose your slot and reserve your mat. Tap any session to see the details.</p>
+          </div>
+
+          <!-- View toggle -->
+          <div class="inline-flex self-start rounded-2xl border border-white/10 bg-white/5 p-1 lg:self-auto" role="tablist" aria-label="Schedule view" data-reveal>
+            <button class="view-btn is-active" data-view="cards" role="tab" aria-selected="true">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span data-i18n="s.cards">Cards</span>
+            </button>
+            <button class="view-btn" data-view="month" role="tab" aria-selected="false">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg><span data-i18n="s.cal">Calendar</span>
+            </button>
+            <button class="view-btn" data-view="list" role="tab" aria-selected="false">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg><span data-i18n="s.list">List</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Spotlight (featured session) -->
+        <div id="spotlight" class="mt-10 overflow-hidden rounded-3xl border border-white/10 bg-navy-900 shadow-card" data-reveal aria-live="polite"></div>
+
+        <!-- Filters -->
+        <div class="relative z-30 -mx-4 mt-10 border-y border-white/5 bg-navy-950/90 px-4 py-4 backdrop-blur-md sm:mx-0 sm:rounded-2xl sm:border sm:px-5 lg:sticky lg:top-[84px]">
+          <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+            <div id="weekTabs" class="no-scrollbar -mx-1 flex gap-2 overflow-x-auto px-1"></div>
+            <div class="flex shrink-0 flex-wrap items-center gap-2">
+              <div class="inline-flex rounded-xl border border-white/10 bg-white/5 p-1" id="slotFilter">
+                <button class="seg-btn is-active" data-slot="all" data-i18n="s.allday">All day</button>
+                <button class="seg-btn" data-slot="Morning" data-i18n="s.morning">☀ Morning</button>
+                <button class="seg-btn" data-slot="Evening" data-i18n="s.evening">☾ Evening</button>
+              </div>
+              <label class="sr-only" for="activityFilter">Activity</label>
+              <select id="activityFilter" class="select-dark"></select>
+              <label class="sr-only" for="statusFilter">Status</label>
+              <select id="statusFilter" class="select-dark"></select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Legend + result count -->
+        <div class="mt-6 flex flex-wrap items-center justify-between gap-3 text-sm">
+          <p id="resultCount" class="text-white/60"></p>
+          <div id="legend" class="flex flex-wrap items-center gap-4 text-white/60"></div>
+        </div>
+
+        <!-- Views -->
+        <div id="view-cards" class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"></div>
+        <div id="view-month" class="mt-6 hidden"></div>
+        <div id="view-list" class="mt-6 hidden"></div>
+
+        <div id="emptyState" class="mt-6 hidden rounded-3xl border border-dashed border-white/15 p-12 text-center">
+          <p class="font-display text-3xl font-bold uppercase italic" data-i18n="s.empty">No sessions match</p>
+          <p class="mt-2 text-white/60" data-i18n="s.emptyp">Try a different week, slot or activity.</p>
+          <button id="resetFilters" class="btn-ghost mx-auto mt-6" data-i18n="s.reset">Reset filters</button>
+        </div>
+
+        <p class="mt-8 text-center text-xs text-white/40" data-i18n="s.note">Schedule may change — confirmed sessions are marked in green. We'll notify registered participants of any updates.</p>
+      </div>
+    </section>
+
+    <!-- ============================== HOW IT WORKS ============================== -->
+    <section class="relative bg-white py-20 text-navy-900 sm:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="eyebrow justify-center" data-reveal data-i18n="h.eyebrow">How it works</p>
+          <h2 class="mt-3 font-display text-5xl font-bold uppercase italic leading-[.95] sm:text-6xl" data-split data-i18n="h.title">Three steps to your <span class="text-gold-gradient-dark">30x30</span></h2>
+        </div>
+        <ol class="mt-14 grid gap-6 md:grid-cols-3" data-stagger>
+          <li class="step-card">
+            <span class="step-num">01</span>
+            <h3 data-i18n="h.s1">Register free</h3>
+            <p data-i18n="h.s1p">Sign up below in under a minute. No fees, no membership — just your name and number.</p>
+          </li>
+          <li class="step-card">
+            <span class="step-num">02</span>
+            <h3 data-i18n="h.s2">Pick your sessions</h3>
+            <p data-i18n="h.s2p">Browse the calendar, choose morning or evening, and reserve the classes you love.</p>
+          </li>
+          <li class="step-card">
+            <span class="step-num">03</span>
+            <h3 data-i18n="h.s3">Show up &amp; move</h3>
+            <p data-i18n="h.s3p">Arrive 10 minutes early at RAG Biz HQ in comfortable clothing with a water bottle.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============================== GALLERY ============================== -->
+    <section id="gallery" class="relative overflow-hidden bg-gradient-to-b from-navy-950 to-navy-900 py-20 sm:py-28">
+      <div class="absolute top-40 h-96 w-96 rounded-full bg-gold-500/10 blur-[120px] ltr:-right-40 rtl:-left-40"></div>
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p class="eyebrow" data-reveal data-i18n="g.eyebrow">Gallery</p>
+            <h2 class="mt-3 font-display text-5xl font-bold uppercase italic leading-[.95] sm:text-6xl" data-split data-i18n="g.title">Inside <span class="text-gold-gradient">RAG Biz HQ</span></h2>
+            <p class="mt-4 max-w-xl text-white/65" data-reveal data-i18n="g.p">A premium business centre designed for focus, collaboration — and this November, movement.</p>
+          </div>
+          <div id="galleryFilters" class="no-scrollbar -mx-1 flex gap-2 overflow-x-auto px-1" data-reveal></div>
+        </div>
+
+        <div id="galleryGrid" class="mt-10 grid auto-rows-[150px] grid-cols-2 gap-3 [grid-auto-flow:dense] sm:auto-rows-[200px] sm:gap-4 md:grid-cols-4 lg:auto-rows-[230px]"></div>
+      </div>
+    </section>
+
+    <!-- ============================== REGISTER ============================== -->
+    <section id="register" class="relative overflow-hidden bg-navy-900 py-20 sm:py-28">
+      <div class="absolute inset-0">
+        <img src="assets/img/gallery/RAG00580.webp" alt="" class="h-[120%] w-full object-cover opacity-15" loading="lazy" data-parallax="0.1" />
+        <div class="absolute inset-0 bg-gradient-to-br from-navy-950 via-navy-900/95 to-navy-800/90"></div>
+      </div>
+      <div class="relative mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+        <div>
+          <p class="eyebrow" data-reveal data-i18n="r.eyebrow">Register</p>
+          <h2 class="mt-3 font-display text-5xl font-bold uppercase italic leading-[.95] sm:text-6xl" data-split data-i18n="r.title">Claim your <span class="text-gold-gradient">free spot</span></h2>
+          <p class="mt-5 max-w-lg text-white/70" data-reveal data-i18n="r.p">Spaces per session are limited. Register once and we'll send you the schedule, reminders and any updates on WhatsApp.</p>
+
+          <div class="mt-10 space-y-4" data-stagger>
+            <a href="https://maps.google.com/?q=Addiyar+Building+Sheikh+Zayed+Road+Dubai" target="_blank" rel="noopener" class="contact-row">
+              <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 1114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+              <span><small data-i18n="r.venue">Venue</small><b data-i18n="r.venuev">RAG Biz HQ, Addiyar Building, Sheikh Zayed Road, Dubai</b></span>
+            </a>
+            <a href="tel:+971586046586" class="contact-row">
+              <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8 9.8a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg></span>
+              <span><small data-i18n="r.call">Call or WhatsApp</small><b dir="ltr">+971 58 604 6586</b></span>
+            </a>
+            <a href="mailto:info@ragroup.ae" class="contact-row">
+              <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg></span>
+              <span><small data-i18n="r.email">Email</small><b>info@ragroup.ae</b></span>
+            </a>
+          </div>
+        </div>
+
+        <div data-reveal>
+          <form id="registerForm" class="glass-card rounded-3xl p-6 sm:p-8" novalidate>
+            <div class="grid gap-4 sm:grid-cols-2">
+              <div class="sm:col-span-2">
+                <label class="field-label" for="r-name" data-i18n="f.name">Full name</label>
+                <input id="r-name" name="name" type="text" autocomplete="name" required class="field" placeholder="Your full name" data-i18n-ph="f.namePh" />
+                <p class="field-error" data-i18n="f.nameErr">Please enter your name.</p>
+              </div>
+              <div>
+                <label class="field-label" for="r-phone" data-i18n="f.phone">Mobile / WhatsApp</label>
+                <input id="r-phone" name="phone" type="tel" autocomplete="tel" required pattern="[+0-9 \-]{8,}" class="field" placeholder="+971 5X XXX XXXX" dir="ltr" />
+                <p class="field-error" data-i18n="f.phoneErr">Please enter a valid number.</p>
+              </div>
+              <div>
+                <label class="field-label" for="r-email" data-i18n="f.email">Email</label>
+                <input id="r-email" name="email" type="email" autocomplete="email" required class="field" placeholder="you@email.com" dir="ltr" />
+                <p class="field-error" data-i18n="f.emailErr">Please enter a valid email.</p>
+              </div>
+              <div>
+                <label class="field-label" for="r-activity" data-i18n="f.activity">Favourite activity</label>
+                <select id="r-activity" name="activity" class="field"></select>
+              </div>
+              <div>
+                <label class="field-label" for="r-slot" data-i18n="f.slot">Preferred slot</label>
+                <select id="r-slot" name="slot" class="field">
+                  <option value="" data-i18n="f.noPref">No preference</option>
+                  <option value="Morning" data-i18n="f.morning">Morning</option>
+                  <option value="Evening" data-i18n="f.evening">Evening</option>
+                </select>
+              </div>
+              <div class="sm:col-span-2">
+                <label class="flex items-start gap-3 text-sm text-white/70">
+                  <input type="checkbox" name="consent" required class="mt-0.5 h-5 w-5 shrink-0 rounded border-white/20 bg-white/10 accent-[#D4A84B]" />
+                  <span data-i18n="f.consent">I agree to receive session updates from RAG Holdings and confirm I'm fit to take part in physical activity.</span>
+                </label>
+                <p class="field-error" data-i18n="f.consentErr">Please accept to continue.</p>
+              </div>
+            </div>
+            <button type="submit" class="btn-gold mt-6 w-full justify-center py-4 text-base">
+              <span data-i18n="f.submit">Register for free</span>
+              <svg class="flip-rtl h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+            <p class="mt-3 text-center text-xs text-white/40" data-i18n="f.privacy">We respect your privacy. No spam, ever.</p>
+          </form>
+
+          <div id="registerSuccess" class="glass-card hidden rounded-3xl p-8 text-center sm:p-12">
+            <div class="mx-auto grid h-16 w-16 place-items-center rounded-full bg-gold-500 text-navy-950">
+              <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>
+            </div>
+            <h3 class="mt-6 font-display text-4xl font-bold uppercase italic" data-i18n="f.ok">You're in!</h3>
+            <p class="mt-3 text-white/70" data-i18n="f.okp">Thanks for joining RAG Biz HQ's 30x30. We'll be in touch with your schedule and reminders.</p>
+            <a href="#schedule" class="btn-gold mt-8 inline-flex" data-i18n="f.browse">Browse sessions</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== FAQ ============================== -->
+    <section id="faq" class="bg-white py-20 text-navy-900 sm:py-24">
+      <div class="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-3 lg:px-8">
+        <div>
+          <p class="eyebrow" data-reveal data-i18n="q.eyebrow">FAQ</p>
+          <h2 class="mt-3 font-display text-5xl font-bold uppercase italic leading-[.95]" data-split data-i18n="q.title">Good to <span class="text-gold-gradient-dark">know</span></h2>
+          <p class="mt-4 text-navy-900/65" data-reveal data-i18n="q.p">Can't find your answer? Message us on WhatsApp and our team will help.</p>
+          <a href="https://wa.me/971586046586" target="_blank" rel="noopener" class="mt-6 inline-flex items-center gap-2 rounded-xl bg-navy-900 px-5 py-3 font-bold text-white hover:bg-navy-700" data-reveal data-i18n="q.chat">Chat with us</a>
+        </div>
+        <div class="space-y-3 lg:col-span-2" id="faqList" data-stagger>
+          <details class="faq" open>
+            <summary data-i18n="q.1">Are the sessions really free?</summary>
+            <p data-i18n="q.1a">Yes. Every session at RAG Biz HQ during Dubai Fitness Challenge 2026 is completely free to attend. We only ask that you register so we can plan space and keep you updated.</p>
+          </details>
+          <details class="faq">
+            <summary data-i18n="q.2">Who can join?</summary>
+            <p data-i18n="q.2a">Everyone in Dubai — residents, visitors, RAG clients and their teams. Sessions are designed for all ages and fitness levels; instructors offer easier and harder options.</p>
+          </details>
+          <details class="faq">
+            <summary data-i18n="q.3">What should I bring?</summary>
+            <p data-i18n="q.3a">Comfortable workout clothing, a water bottle and a towel. If you have your own yoga mat, feel free to bring it.</p>
+          </details>
+          <details class="faq">
+            <summary data-i18n="q.4">What does "Tentative" or "Available" mean on the calendar?</summary>
+            <p data-i18n="q.4a"><b>Confirmed</b> sessions are locked in with an instructor. <b>Tentative</b> sessions are being finalised. <b>Available</b> sessions are open slots — register and we'll let you know the moment they're confirmed.</p>
+          </details>
+          <details class="faq">
+            <summary data-i18n="q.5">Do I need to attend all 30 days?</summary>
+            <p data-i18n="q.5a">Not at all. The challenge is about 30 minutes of activity a day — anywhere. Join as many RAG sessions as you like and mix them with your own runs, rides and walks.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================== FOOTER ============================== -->
+  <footer class="relative overflow-hidden bg-navy-950 pt-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col items-start justify-between gap-10 border-b border-white/10 pb-12 lg:flex-row lg:items-center">
+        <div class="flex items-center gap-4">
+          <img src="assets/img/rag-logo.webp" alt="RAG Holdings" class="h-16 w-16" loading="lazy" />
+          <div>
+            <p class="font-display text-3xl font-bold uppercase italic">RAG Biz HQ <span class="text-gold-gradient">× 30x30</span></p>
+            <p class="text-sm text-white/50" data-i18n="ft.tag">Building businesses. Enabling growth. Moving Dubai.</p>
+          </div>
+        </div>
+        <a href="#register" class="btn-gold magnetic px-7 py-4" data-i18n="ft.cta">Join the challenge</a>
+      </div>
+      <div class="flex flex-col gap-4 py-8 text-sm text-white/50 sm:flex-row sm:items-center sm:justify-between">
+        <p data-i18n="ft.rights">© 2026 RAG Holdings. All rights reserved.</p>
+        <p data-i18n="ft.support">Supporting the Dubai Fitness Challenge · 31 Oct – 29 Nov 2026</p>
+      </div>
+    </div>
+    <p class="footer-giant pointer-events-none select-none text-center font-display text-[22vw] font-bold uppercase italic leading-[.75] text-white/[.04]" dir="ltr">30x30</p>
+  </footer>
+
+  <!-- Mobile sticky CTA -->
+  <div id="mobileCta" class="fixed inset-x-0 bottom-0 z-40 translate-y-full border-t border-white/10 bg-navy-950/95 p-3 backdrop-blur-md transition-transform duration-300 sm:hidden">
+    <a href="#register" class="btn-gold w-full justify-center py-3.5" data-i18n="cta.reserveFree">Reserve your free spot</a>
+  </div>
+
+  <!-- Back to top -->
+  <button id="toTop" class="fixed bottom-6 z-40 hidden h-12 w-12 place-items-center rounded-full border border-gold-500/40 bg-navy-900/90 text-gold-300 backdrop-blur transition hover:bg-gold-500 hover:text-navy-950 ltr:left-4 rtl:right-4 sm:grid sm:opacity-0" aria-label="Back to top">
+    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+
+  <!-- ============================== MARKETING POPUP ============================== -->
+  <div id="promo" class="modal" role="dialog" aria-modal="true" aria-labelledby="promoTitle" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-panel max-w-3xl" data-lenis-prevent>
+      <button class="modal-close" data-close-modal aria-label="Close">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <div class="grid md:grid-cols-5">
+        <div class="relative hidden md:col-span-2 md:block">
+          <img src="https://images.unsplash.com/photo-1575052814086-f385e2e2ad1b?auto=format&fit=crop&w=700&q=70" alt="" class="absolute inset-0 h-full w-full object-cover" onerror="this.src='assets/img/gallery/RAG00578.webp'" />
+          <div class="absolute inset-0 bg-gradient-to-t from-navy-950/90 to-transparent"></div>
+          <div class="absolute bottom-5 left-5 right-5">
+            <p class="font-display text-6xl font-bold italic leading-none text-gold-gradient" dir="ltr">30x30</p>
+            <p class="text-xs font-medium uppercase tracking-[.2em] text-white/70" data-i18n="chip.dates">31 Oct – 29 Nov</p>
+          </div>
+        </div>
+        <div class="relative p-6 sm:p-9 md:col-span-3">
+          <span class="inline-flex items-center gap-2 rounded-full bg-gold-500/15 px-3 py-1 text-[11px] font-bold uppercase tracking-[.2em] text-gold-300 ring-1 ring-gold-500/30" data-i18n="p.badge">Limited spots · 100% free</span>
+          <h2 id="promoTitle" class="mt-4 font-display text-4xl font-bold uppercase italic leading-[.95] sm:text-5xl" data-i18n="p.title">Your <span class="text-gold-gradient">30x30</span> starts at RAG Biz HQ</h2>
+          <p class="mt-3 text-sm leading-relaxed text-white/70" data-i18n="p.p">Free yoga, wellness, pilates &amp; dance sessions every morning and evening during Dubai Fitness Challenge. Register now and get the full schedule on WhatsApp.</p>
+
+          <form id="promoForm" class="mt-6 space-y-3" novalidate>
+            <label class="sr-only" for="p-phone">WhatsApp number</label>
+            <input id="p-phone" type="tel" required pattern="[+0-9 \-]{8,}" class="field" placeholder="Your WhatsApp number" data-i18n-ph="p.ph" autocomplete="tel" />
+            <p class="field-error" data-i18n="f.phoneErr">Please enter a valid number.</p>
+            <button class="btn-gold w-full justify-center py-3.5" type="submit" data-i18n="p.btn">Send me the schedule</button>
+          </form>
+          <div id="promoSuccess" class="mt-6 hidden rounded-2xl border border-gold-500/30 bg-gold-500/10 p-4 text-sm text-gold-200" data-i18n="p.ok">
+            🎉 You're on the list! We'll WhatsApp you the schedule shortly.
+          </div>
+
+          <div class="mt-5 flex items-center justify-between text-xs text-white/50">
+            <span class="flex -space-x-2 rtl:space-x-reverse">
+              <img src="assets/img/gallery/RAG00584.webp" alt="" class="h-7 w-7 rounded-full border-2 border-navy-900 object-cover" />
+              <img src="assets/img/gallery/RAG00577.webp" alt="" class="h-7 w-7 rounded-full border-2 border-navy-900 object-cover" />
+              <img src="assets/img/gallery/RAG01206.webp" alt="" class="h-7 w-7 rounded-full border-2 border-navy-900 object-cover" />
+            </span>
+            <button class="underline underline-offset-4 hover:text-white" data-close-modal data-i18n="p.no">No thanks, maybe later</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================== BOOKING MODAL ============================== -->
+  <div id="booking" class="modal" role="dialog" aria-modal="true" aria-labelledby="bookingTitle" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-panel max-w-lg" data-lenis-prevent>
+      <button class="modal-close" data-close-modal aria-label="Close">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <div id="bookingHeader"></div>
+      <div class="p-6 sm:p-8">
+        <form id="bookingForm" class="space-y-4" novalidate>
+          <div>
+            <label class="field-label" for="b-name" data-i18n="f.name">Full name</label>
+            <input id="b-name" type="text" required class="field" autocomplete="name" placeholder="Your full name" data-i18n-ph="f.namePh" />
+            <p class="field-error" data-i18n="f.nameErr">Please enter your name.</p>
+          </div>
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label class="field-label" for="b-phone" data-i18n="b.wa">WhatsApp</label>
+              <input id="b-phone" type="tel" required pattern="[+0-9 \-]{8,}" class="field" autocomplete="tel" placeholder="+971 5X XXX XXXX" dir="ltr" />
+              <p class="field-error" data-i18n="f.phoneErr">Please enter a valid number.</p>
+            </div>
+            <div>
+              <label class="field-label" for="b-guests" data-i18n="b.people">People</label>
+              <select id="b-guests" class="field"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+            </div>
+          </div>
+          <button type="submit" class="btn-gold w-full justify-center py-3.5" id="bookingSubmit">Reserve my spot</button>
+        </form>
+        <div id="bookingSuccess" class="hidden text-center">
+          <div class="mx-auto grid h-14 w-14 place-items-center rounded-full bg-gold-500 text-navy-950">
+            <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>
+          </div>
+          <h3 class="mt-4 font-display text-3xl font-bold uppercase italic" data-i18n="b.ok">Spot reserved</h3>
+          <p class="mt-2 text-sm text-white/70" data-i18n="b.okp">See you at RAG Biz HQ! Add it to your calendar so you don't miss it.</p>
+          <div class="mt-6 grid gap-3 sm:grid-cols-2">
+            <button id="addToCalendar" class="btn-gold justify-center" data-i18n="b.cal">Add to calendar</button>
+            <button class="btn-ghost justify-center" data-close-modal data-i18n="b.done">Done</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================== LIGHTBOX ============================== -->
+  <div id="lightbox" class="fixed inset-0 z-[80] hidden items-center justify-center bg-navy-950/95 p-4 backdrop-blur" role="dialog" aria-modal="true" aria-label="Image viewer" dir="ltr">
+    <button class="lb-btn right-4 top-4" data-lb="close" aria-label="Close"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <button class="lb-btn left-2 top-1/2 -translate-y-1/2 sm:left-6" data-lb="prev" aria-label="Previous image"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <button class="lb-btn right-2 top-1/2 -translate-y-1/2 sm:right-6" data-lb="next" aria-label="Next image"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg></button>
+    <figure class="flex max-h-full w-full max-w-5xl flex-col items-center">
+      <img id="lbImg" src="" alt="" class="max-h-[78vh] w-auto rounded-2xl object-contain shadow-2xl" />
+      <figcaption class="mt-4 flex items-center gap-3 text-sm text-white/70">
+        <span id="lbTitle" class="font-bold text-white"></span>
+        <span class="h-1 w-1 rounded-full bg-gold-400"></span>
+        <span id="lbCount"></span>
+      </figcaption>
+    </figure>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="pointer-events-none fixed left-1/2 top-24 z-[90] -translate-x-1/2 -translate-y-4 rounded-2xl border border-gold-500/30 bg-navy-900/95 px-5 py-3 text-sm font-medium opacity-0 shadow-2xl backdrop-blur transition-all duration-300"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="assets/js/schedule-data.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/motion.js"></script>
+</body>
+</html>
