@@ -111,13 +111,14 @@
     .set(intro, { display: 'none' })
     .to('#header .nav-shell', { yPercent: 0, duration: 0.9 }, '-=0.5')
     .to(heroWords, { yPercent: 0, rotate: 0, duration: 1.1, stagger: 0.06 }, '-=0.75')
-    .to('.hero-media', { scale: 1, opacity: 1, duration: 1.8, ease: 'expo.out' }, '-=1.1')
+    .to('.hero-media', { scale: 1, opacity: 1, duration: 1.8, ease: 'expo.out', clearProps: 'transform,opacity' }, '-=1.1')
     .to('#heroEyebrow', { y: 0, opacity: 1, duration: 0.8, clearProps: 'all' }, '-=1.5')
     .to('.hero-fade', { y: 0, opacity: 1, duration: 0.9, stagger: 0.12 }, '-=1.1');
 
   // Hero content drifts and fades as you scroll away.
   gsap.to('.hero-title', { yPercent: -18, opacity: 0.25, ease: 'none', scrollTrigger: { trigger: '#home', start: 'top top', end: 'bottom top', scrub: true } });
-  gsap.to('#heroBg', { scale: 1.15, ease: 'none', scrollTrigger: { trigger: '#home', start: 'top top', end: 'bottom top', scrub: true } });
+  // Parallax by translation only (no scaling) so it doesn't fight the slides' own zoom.
+  gsap.to('#heroBg', { yPercent: 18, ease: 'none', force3D: true, scrollTrigger: { trigger: '#home', start: 'top top', end: 'bottom top', scrub: true } });
 
   /* ---------------- Section reveals ---------------- */
   $$('[data-split]').forEach((el) => {

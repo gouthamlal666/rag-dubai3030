@@ -116,7 +116,8 @@
     if (!slides.length || !card) return;
     const DURATION = 5500;
     const fallback = 'assets/img/gallery/RAG00578.webp';
-    const img = (s, i) => `<img src="${esc(s.image)}" alt="" class="hs-slide ${i === 0 ? 'is-active' : ''}" ${i ? 'loading="lazy"' : ''} onerror="this.onerror=null;this.src='${fallback}'" />`;
+    // Images are loaded up-front (no lazy loading) so a slide never appears half-loaded.
+    const img = (s, i) => `<img src="${esc(s.image)}" alt="" class="hs-slide ${i === 0 ? 'is-active' : ''}" decoding="async" ${i === 0 ? 'fetchpriority="high"' : ''} onerror="this.onerror=null;this.src='${fallback}'" />`;
     $('#heroBg').innerHTML = slides.map(img).join('');
     $('#heroBars').innerHTML = slides.map((_, i) => `<button type="button" class="hs-bar" data-goto="${i}" aria-label="Slide ${i + 1}"><span></span></button>`).join('');
 
@@ -146,10 +147,45 @@
         requestAnimationFrame(() => [eb, cap].forEach((el) => el.classList.add('is-in')));
       });
     }
-    function go(i) {
-      current = (i + slides.length) % slides.length;
+    let pending = false;
+    function go(i, { instant = false } = {}) {
+      const next = (i + slides.length) % slides.length;
+      const els = $$('#heroBg .hs-slide');
+      const target = els[next];
+      // Wait (briefly) for the next image so it never pops in mid-fade.
+      if (!instant && target && !(target.complete && target.naturalWidth)) {
+        if (pending) return;
+        pending = true;
+        const done = () => { if (!pending) return; pending = false; go(next, { instant: true }); };
+        target.addEventListener('load', done, { once: true });
+        target.addEventListener('error', done, { once: true });
+        setTimeout(done, 1200);
+        return;
+      }
+      pending = false;
+      const old = current;
+      current = next;
       progress = 0;
-      $$('#heroBg .hs-slide').forEach((el, n) => el.classList.toggle('is-active', n === current));
+      els.forEach((el, n) => {
+        el.classList.remove('is-prev');
+        if (n !== current) el.classList.remove('is-active');
+      });
+      if (old !== current && els[old]) {
+        // The old slide stays fully visible underneath until the new one has finished
+        // fading in (transitionend), with a generous timeout as a fallback.
+        const under = els[old], over = els[current];
+        under.classList.add('is-prev');
+        let fallback = null;
+        const release = (e) => {
+          if (e && (e.target !== over || e.propertyName !== 'opacity')) return;
+          over.removeEventListener('transitionend', release);
+          clearTimeout(fallback);
+          if (over.classList.contains('is-active')) under.classList.remove('is-prev');
+        };
+        over.addEventListener('transitionend', release);
+        fallback = setTimeout(release, 2500);
+      }
+      els[current].classList.add('is-active');
       $('#heroCount').textContent = `${String(current + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
       fills.forEach((f, n) => { f.style.width = n < current ? '100%' : '0%'; });
       $$('#heroCopy .hero-copy-item').forEach((el, n) => {
@@ -160,7 +196,7 @@
     }
     function frame(now) {
       const dt = now - last; last = now;
-      if (!paused && !document.hidden) {
+      if (!paused && !pending && !document.hidden) {
         progress += dt;
         fills[current].style.width = `${Math.min(100, (progress / DURATION) * 100)}%`;
         if (progress >= DURATION) go(current + 1);
@@ -186,7 +222,7 @@
     });
 
     renderCopy();
-    go(0);
+    go(0, { instant: true });
     requestAnimationFrame(frame);
     heroSlider = { go, refreshCaption, renderCopy };
   }
@@ -770,8 +806,10 @@
     const onScroll = () => {
       const y = window.scrollY;
       header.classList.toggle('is-scrolled', y > 20);
-      header.classList.toggle('is-hidden', y > 400 && y > lastY && !$('#mobileMenu.is-open'));
-      lastY = y;
+      if (Math.abs(y - lastY) > 8) { // ignore sub-pixel jitter from smooth scrolling
+        header.classList.toggle('is-hidden', y > 400 && y > lastY && !$('#mobileMenu.is-open'));
+        lastY = y;
+      }
       const h = document.documentElement.scrollHeight - innerHeight;
       progress.style.width = `${h > 0 ? (y / h) * 100 : 0}%`;
       toTop.classList.toggle('is-show', y > 800);
