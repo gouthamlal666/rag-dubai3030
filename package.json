@@ -1,0 +1,11 @@
+{
+  "name": "rag-dubai3030",
+  "private": true,
+  "description": "RAG Biz HQ × Dubai 30x30 landing page",
+  "scripts": {
+    "build:css": "tailwindcss -c tailwind.config.js -i src/tailwind.css -o assets/css/tailwind.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.16"
+  }
+}

@@ -101,17 +101,24 @@
   const heroWords = splitWords($('#heroTitle'));
   gsap.set(heroWords, { yPercent: 115, rotate: 4 });
   gsap.set('.hero-fade', { y: 30, opacity: 0 });
-  gsap.set('.hero-media', { scale: 1.12, opacity: 0 });
+  gsap.set('.hero-media', { scale: 1.06 }); // photo stays visible (it's the main content); it just settles in
   gsap.set('#heroEyebrow', { y: 20, opacity: 0 });
 
+  // The logo intro plays once per visit and is kept short; later page loads go straight to the hero.
+  let seenIntro = false;
+  try { seenIntro = sessionStorage.getItem('rag3030-intro') === '1'; sessionStorage.setItem('rag3030-intro', '1'); } catch { /* storage unavailable */ }
   const tl = gsap.timeline({ defaults: { ease } });
-  tl.fromTo('.intro-logo', { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.7 })
-    .to('.intro-logo', { scale: 1.15, opacity: 0, duration: 0.45, ease: 'power2.in' }, '+=0.25')
-    .to(intro, { yPercent: -100, duration: 0.9, ease: 'expo.inOut' }, '-=0.15')
-    .set(intro, { display: 'none' })
-    .to('#header .nav-shell', { yPercent: 0, duration: 0.9 }, '-=0.5')
+  if (seenIntro || !intro) {
+    intro && intro.remove();
+  } else {
+    tl.fromTo('.intro-logo', { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35 })
+      .to('.intro-logo', { scale: 1.1, opacity: 0, duration: 0.25, ease: 'power2.in' }, '+=0.1')
+      .to(intro, { yPercent: -100, duration: 0.6, ease: 'expo.inOut' }, '-=0.1')
+      .set(intro, { display: 'none' });
+  }
+  tl.to('#header .nav-shell', { yPercent: 0, duration: 0.9 }, seenIntro ? 0 : '-=0.4')
     .to(heroWords, { yPercent: 0, rotate: 0, duration: 1.1, stagger: 0.06 }, '-=0.75')
-    .to('.hero-media', { scale: 1, opacity: 1, duration: 1.8, ease: 'expo.out', clearProps: 'transform,opacity' }, '-=1.1')
+    .to('.hero-media', { scale: 1, duration: 1.6, ease: 'expo.out', clearProps: 'transform' }, '-=1.1')
     .to('#heroEyebrow', { y: 0, opacity: 1, duration: 0.8, clearProps: 'all' }, '-=1.5')
     .to('.hero-fade', { y: 0, opacity: 1, duration: 0.9, stagger: 0.12 }, '-=1.1');
 

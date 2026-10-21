@@ -67,7 +67,9 @@ section[id] { scroll-margin-top: 96px; }
 .w-inner { display: inline-block; will-change: transform; }
 
 /* ---------- Intro ---------- */
-#intro { will-change: transform; }
+/* Safety net: the intro screen hides itself even if the scripts are slow or fail. */
+#intro { will-change: transform; animation: introFailsafe 0s linear 2.2s forwards; }
+@keyframes introFailsafe { to { visibility: hidden; opacity: 0; } }
 
 /* ---------- Buttons ---------- */
 .btn-gold, .btn-ghost {

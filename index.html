@@ -11,32 +11,17 @@
   <meta property="og:description" content="30 minutes a day for 30 days. Sessions in the RAG Biz HQ Community Arena, Sheikh Zayed Road." />
   <meta property="og:image" content="assets/img/gallery/RAG00584.webp" />
   <link rel="icon" href="assets/img/rag-logo.webp" />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <!-- First hero photo: start downloading immediately (sizes match heroImageWidth() in main.js) -->
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=800&q=75" media="(max-width: 767px)" fetchpriority="high" />
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=1400&q=75" media="(min-width: 768px)" fetchpriority="high" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600;1,700;1,800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700;1,800&display=swap" rel="stylesheet" />
 
-  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            navy: { 950: '#020817', 900: '#061230', 850: '#081838', 800: '#0B1F45', 700: '#10295C', 600: '#173576' },
-            gold: { 200: '#F8E7B5', 300: '#F1D58A', 400: '#E5BF66', 500: '#D4A84B', 600: '#B8862F', 700: '#8F6620' },
-          },
-          fontFamily: {
-            sans: ['Montserrat', 'Dubai', '-apple-system', 'system-ui', '"Segoe UI"', 'Roboto', 'Arial', 'sans-serif'],
-            display: ['Montserrat', 'Dubai', '-apple-system', 'system-ui', '"Segoe UI"', 'Roboto', 'Arial', 'sans-serif'],
-          },
-          boxShadow: {
-            gold: '0 10px 40px -10px rgba(212,168,75,.55)',
-            card: '0 20px 60px -20px rgba(2,8,23,.65)',
-          },
-        },
-      },
-    };
-  </script>
   <link rel="stylesheet" href="assets/css/styles.css" />
+  <!-- Prebuilt Tailwind (npm run build:css). Loaded after styles.css, matching the old CDN order. -->
+  <link rel="stylesheet" href="assets/css/tailwind.css" />
 </head>
 
 <body class="bg-navy-950 font-sans text-white antialiased selection:bg-gold-500 selection:text-navy-950">
@@ -610,7 +595,7 @@
       <div class="grid md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
         <!-- Info side -->
         <aside class="contact-aside relative overflow-hidden p-6 pt-8 sm:p-8 md:p-10">
-          <img src="assets/img/gallery/RAG00584.webp" alt="" class="absolute inset-0 h-full w-full object-cover" />
+          <img src="assets/img/gallery/RAG00584.webp" alt="" class="absolute inset-0 h-full w-full object-cover" loading="lazy" decoding="async" />
           <div class="absolute inset-0 bg-gradient-to-b from-navy-950/60 via-navy-950/80 to-navy-950/95"></div>
           <div class="relative flex h-full flex-col">
             <img src="assets/img/rag-logo.webp" alt="RAG Holdings" class="hidden h-11 w-11 md:block" />
@@ -724,9 +709,10 @@
   <!-- Toast -->
   <div id="toast" class="pointer-events-none fixed left-1/2 top-24 z-[90] -translate-x-1/2 -translate-y-4 rounded-2xl border border-gold-500/30 bg-navy-900/95 px-5 py-3 text-sm font-medium opacity-0 shadow-2xl backdrop-blur transition-all duration-300"></div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <!-- Animation libraries are served from this site (GSAP 3.12.5, Lenis 1.1.13) to avoid extra connections on mobile -->
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script src="assets/vendor/ScrollTrigger.min.js"></script>
+  <script src="assets/vendor/lenis.min.js"></script>
   <script src="assets/js/schedule-data.js"></script>
   <script src="assets/js/i18n.js"></script>
   <script src="assets/js/main.js"></script>

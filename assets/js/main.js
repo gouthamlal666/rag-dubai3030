@@ -20,6 +20,11 @@
     get(k) { try { return sessionStorage.getItem(k); } catch { return null; } },
     set(k, v) { try { sessionStorage.setItem(k, v); } catch { /* storage unavailable */ } },
   };
+  // Unsplash serves any width we ask for; local images are returned unchanged.
+  const sizedImage = (url, w) => (/images\.unsplash\.com/.test(url) ? url.replace(/([?&])w=\d+/, `$1w=${w}`) : url);
+  // Hero photos fill the screen: 800px wide on phones, 1400px on larger screens.
+  // Keep in sync with the <link rel="preload"> tags in index.html.
+  const heroImageWidth = () => (window.matchMedia('(max-width: 767px)').matches ? 800 : 1400);
   // Smooth-scroll + scroll-lock helpers are provided by motion.js when it loads.
   const scroller = () => window.RAG_SCROLL;
   const scrollToY = (y) => (scroller() ? scroller().to(y) : window.scrollTo({ top: y, behavior: 'smooth' }));
@@ -143,9 +148,16 @@
     if (!slides.length || !card) return;
     const DURATION = 5500;
     const fallback = 'assets/img/gallery/RAG00578.webp';
-    // Images are loaded up-front (no lazy loading) so a slide never appears half-loaded.
-    const img = (s, i) => `<img src="${esc(s.image)}" alt="" class="hs-slide ${i === 0 ? 'is-active' : ''}" decoding="async" ${i === 0 ? 'fetchpriority="high"' : ''} onerror="this.onerror=null;this.src='${fallback}'" />`;
+    // Only the first photo loads with the page (it's preloaded in <head>); the others
+    // load once the page is ready, so phones aren't downloading six photos up front.
+    const w = heroImageWidth();
+    const img = (s, i) => `<img ${i === 0 ? 'src' : 'data-src'}="${esc(sizedImage(s.image, w))}" alt="" class="hs-slide ${i === 0 ? 'is-active' : ''}" decoding="async" ${i === 0 ? 'fetchpriority="high"' : ''} onerror="this.onerror=null;this.src='${fallback}'" />`;
     $('#heroBg').innerHTML = slides.map(img).join('');
+    const loadSlide = (el) => { if (el && !el.getAttribute('src') && el.dataset.src) el.src = el.dataset.src; };
+    const loadRest = () => $$('#heroBg .hs-slide').forEach(loadSlide);
+    const idle = window.requestIdleCallback || ((fn) => setTimeout(fn, 600));
+    if (document.readyState === 'complete') idle(loadRest);
+    else window.addEventListener('load', () => idle(loadRest), { once: true });
     $('#heroBars').innerHTML = slides.map((_, i) => `<button type="button" class="hs-bar" data-goto="${i}" aria-label="Slide ${i + 1}"><span></span></button>`).join('');
 
     let current = 0, progress = 0, paused = false, last = performance.now();
@@ -179,6 +191,7 @@
       const next = (i + slides.length) % slides.length;
       const els = $$('#heroBg .hs-slide');
       const target = els[next];
+      loadSlide(target);
       // Wait (briefly) for the next image so it never pops in mid-fade.
       if (!instant && target && !(target.complete && target.naturalWidth)) {
         if (pending) return;
@@ -304,8 +317,9 @@
     return `<span class="status-chip ring-1 ${st.chip}"><span class="h-1.5 w-1.5 rounded-full ${st.dot}"></span>${esc(statusLabel(s.status))}</span>`;
   };
   const slotChip = (s) => `<span class="slot-chip slot-${s.slot}">${icons[CFG.slots[s.slot].icon]}${esc(slotLabel(s))}</span>`;
-  const imgTag = (s, cls = '') =>
-    `<img src="${esc(info(s).image)}" alt="${esc(title(s))}" loading="lazy" class="${cls} ${s.activity ? '' : 'tba-img'}" onerror="this.onerror=null;this.src='assets/img/gallery/RAG00578.webp'" />`;
+  // Activity photos come from Unsplash; ask for a width that suits where they're shown.
+  const imgTag = (s, cls = '', w = 640) =>
+    `<img src="${esc(sizedImage(info(s).image, w))}" alt="${esc(title(s))}" loading="lazy" decoding="async" class="${cls} ${s.activity ? '' : 'tba-img'}" onerror="this.onerror=null;this.src='assets/img/gallery/RAG00578.webp'" />`;
 
 
   /* ------------------------------------------------------------------ *
@@ -391,7 +405,7 @@
     return `
       <button type="button" class="session-card ${s.past ? 'is-past' : ''} ${state.selected === s.id ? 'is-selected' : ''}" data-session="${s.id}" aria-label="${esc(title(s))}, ${esc(longDate(s))}, ${esc(slotLabel(s))}">
         <div class="session-media">
-          ${imgTag(s)}
+          ${imgTag(s, '', 640)}
           <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-navy-950/30"></div>
           <div class="absolute left-3 right-3 top-3 flex items-start justify-between gap-2">${slotChip(s)}${statusChip(s)}</div>
           <div class="date-block"><span class="d">${s.dateObj.getDate()}</span><span class="m">${esc(monthShort(s.dateObj))}</span></div>
@@ -463,7 +477,7 @@
           <div class="space-y-3">
             ${items.map((s) => `
               <button type="button" class="list-row ${s.past ? 'opacity-50' : ''}" data-session="${s.id}">
-                ${imgTag(s, 'list-thumb')}
+                ${imgTag(s, 'list-thumb', 200)}
                 <span class="min-w-0">
                   <span class="flex flex-wrap items-center gap-2">${slotChip(s)}<bdi class="text-xs text-white/50">${esc(slotTime(s))}</bdi></span>
                   <span class="mt-1.5 block truncate font-display text-xl font-bold uppercase italic ${s.activity ? '' : 'text-white/60'}">${esc(title(s))}</span>
@@ -483,7 +497,7 @@
     $('#spotlight').innerHTML = `
       <div class="grid lg:grid-cols-5">
         <div class="spot-media lg:col-span-3">
-          ${imgTag(s)}
+          ${imgTag(s, '', 1000)}
           <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/30 to-transparent lg:via-navy-950/10 lg:to-navy-900 ltr:lg:bg-gradient-to-r rtl:lg:bg-gradient-to-l"></div>
           <div class="absolute top-5 flex gap-2 ltr:left-5 rtl:right-5"><span class="rounded-full bg-gold-500 px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-navy-950">${esc(ui('spotlight'))}</span>${slotChip(s)}</div>
           <div class="absolute bottom-5 flex items-end gap-3 ltr:left-5 rtl:right-5">
@@ -614,7 +628,7 @@
     $$('.session-card').forEach((c) => c.classList.toggle('is-selected', c.dataset.session === id));
     $('#sessionHeader').innerHTML = `
       <div class="relative h-48 overflow-hidden rounded-t-[1.75rem]">
-        ${imgTag(s, 'absolute inset-0 h-full w-full object-cover')}
+        ${imgTag(s, 'absolute inset-0 h-full w-full object-cover', 800)}
         <div class="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/60 to-transparent"></div>
         <div class="absolute top-4 flex gap-2 ltr:left-6 rtl:right-6">${slotChip(s)}${statusChip(s)}</div>
         <div class="absolute bottom-4 left-6 right-6">
