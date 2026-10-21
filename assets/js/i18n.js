@@ -85,7 +85,7 @@ window.RAG_I18N = {
 
     'f.consentErr': 'يرجى الموافقة للمتابعة.',
 
-    'f.privacy': 'نستخدم بياناتك فقط للرد على استفسارك.',
+    'f.privacy': 'نستخدم بياناتك فقط للرد على استفسارك. <a href="privacy-policy.html" class="underline decoration-gold-500/60 underline-offset-2 hover:text-gold-300">سياسة الخصوصية</a>',
 
     'q.eyebrow': 'الأسئلة الشائعة',
     'q.title': 'معلومات <span class="text-gold-gradient-dark">تهمّك</span>',
@@ -105,6 +105,8 @@ window.RAG_I18N = {
     'ft.tag': 'RAG Biz HQ، شارع الشيخ زايد، دبي',
 
     'ft.rights': '© 2026 RAG القابضة. جميع الحقوق محفوظة.',
+    'ft.privacy': 'سياسة الخصوصية',
+    'ft.terms': 'الشروط والأحكام',
     'ft.support': 'داعمون لتحدي دبي 30×30 · 31 أكتوبر – 29 نوفمبر 2026',
 
     'b.done': 'تم',

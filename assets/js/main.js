@@ -80,6 +80,35 @@
   $$('.lang-btn').forEach((b) => b.addEventListener('click', () => { if (b.dataset.lang !== lang) setLang(b.dataset.lang); }));
 
   /* ------------------------------------------------------------------ *
+   * Horizontal scroll rows (week tabs, gallery filters): arrow buttons
+   * appear only when there is more to scroll in that direction.
+   * ------------------------------------------------------------------ */
+  function initHScroll(wrap) {
+    const row = wrap.querySelector('.overflow-x-auto');
+    const prev = $('.hs-nav-prev', wrap), next = $('.hs-nav-next', wrap);
+    const update = () => {
+      const max = row.scrollWidth - row.clientWidth;
+      const pos = Math.abs(row.scrollLeft); // scrollLeft is negative in RTL
+      const back = max > 2 && pos > 2, fwd = max > 2 && pos < max - 2;
+      wrap.classList.toggle('can-back', back);
+      wrap.classList.toggle('can-fwd', fwd);
+      prev.classList.toggle('is-visible', back);
+      next.classList.toggle('is-visible', fwd);
+    };
+    wrap.addEventListener('click', (e) => {
+      const b = e.target.closest('[data-hs-dir]'); if (!b) return;
+      const dir = Number(b.dataset.hsDir) * (isAr() ? -1 : 1);
+      row.scrollBy({ left: dir * Math.max(160, row.clientWidth * 0.7), behavior: 'smooth' });
+    });
+    row.addEventListener('scroll', update, { passive: true });
+    new ResizeObserver(update).observe(row);
+    new MutationObserver(() => requestAnimationFrame(update)).observe(row, { childList: true });
+    // Labels change width after a language switch, so re-check the arrows.
+    document.addEventListener('rag:langchange', () => requestAnimationFrame(update));
+    update();
+  }
+
+  /* ------------------------------------------------------------------ *
    * Toast
    * ------------------------------------------------------------------ */
   let toastTimer;
@@ -487,7 +516,7 @@
 
   function renderSchedule() {
     $$('.week-tab').forEach((b) => b.classList.toggle('is-active', String(state.week) === b.dataset.week));
-    $('#weekTabs').classList.toggle('hidden', state.view === 'month');
+    $('#weekTabsWrap').classList.toggle('hidden', state.view === 'month');
 
     const list = filtered({ ignoreWeek: state.view === 'month' });
     ['cards', 'month', 'list'].forEach((v) => $(`#view-${v}`).classList.toggle('hidden', state.view !== v || (v !== 'month' && !list.length)));
@@ -790,6 +819,7 @@
   initHeroSlider();
   initSchedule();
   initGallery();
+  $$('.hscroll').forEach(initHScroll);
   initCountdown();
   initChrome();
 })();
