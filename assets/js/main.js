@@ -537,17 +537,19 @@
   }
 
   /* ------------------------------------------------------------------ *
-   * Modals (promo, contact, session details)
+   * Modals (contact, session details)
    * ------------------------------------------------------------------ */
   let lastFocus = null;
   const lockScroll = () => { document.body.classList.add('modal-open'); scroller() && scroller().lock(); };
   const unlockScroll = () => { document.body.classList.remove('modal-open'); scroller() && scroller().unlock(); };
 
-  function openModal(el) {
+  // Touch devices skip autofocus so the keyboard doesn't jump up over the popup.
+  const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
+  function openModal(el, { focus = !coarsePointer } = {}) {
     lastFocus = document.activeElement;
     el.classList.add('is-open'); el.setAttribute('aria-hidden', 'false');
     lockScroll();
-    setTimeout(() => { const f = $('input, button:not(.modal-close)', el); f && f.focus({ preventScroll: true }); }, 120);
+    if (focus) setTimeout(() => { const f = $('input, textarea, button:not(.modal-close)', el); f && f.focus({ preventScroll: true }); }, 150);
   }
   function closeModal(el) {
     el.classList.remove('is-open'); el.setAttribute('aria-hidden', 'true');
@@ -601,24 +603,6 @@
     openModal($('#sessionModal'));
   }
 
-  // Marketing popup — once per browser session, after a delay or on exit intent.
-  function maybeShowPromo() {
-    if (session.get('rag3030-promo') || store.get('rag3030-registered', false) || $('.modal.is-open') || $('#mobileMenu.is-open')) return;
-    session.set('rag3030-promo', '1');
-    openModal($('#promo'));
-  }
-  setTimeout(maybeShowPromo, 8000);
-  document.addEventListener('mouseout', (e) => { if (!e.relatedTarget && e.clientY < 10) maybeShowPromo(); });
-  $('#promoForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    if (!validate(e.target)) return;
-    // TODO: send lead to your backend / CRM here.
-    store.set('rag3030-registered', true);
-    e.target.classList.add('hidden');
-    $('#promoSuccess').classList.remove('hidden');
-    setTimeout(() => closeModal($('#promo')), 2600);
-  });
-
   // Contact forms (section + popup) and every "Contact Us" button
   $$('.contact-form').forEach((form) => form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -630,16 +614,30 @@
     form.nextElementSibling.classList.remove('hidden');
     toast(ui('toastSent'));
   }));
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('[data-open-contact]')) return;
-    e.preventDefault();
+  function openContact(opts) {
     const modal = $('#contactModal');
-    if (!$('#modalSuccess').classList.contains('hidden')) $('#modalForm').reset(); // fresh form after a sent message
+    if (!$('#modalSuccess').classList.contains('hidden')) $('#modalForm').reset(); // fresh form after a sent enquiry
     $('#modalForm').classList.remove('hidden');
     $('#modalSuccess').classList.add('hidden');
     $$('.modal.is-open').forEach(closeModal);
-    openModal(modal);
+    session.set('rag3030-contact-shown', '1');
+    openModal(modal, opts);
+  }
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('[data-open-contact]')) return;
+    e.preventDefault();
+    openContact();
   });
+
+  // The contact popup also opens on its own once per visit: after a short delay,
+  // or when a desktop visitor moves to leave — never over another popup.
+  function maybeAutoContact() {
+    if (session.get('rag3030-contact-shown') || store.get('rag3030-registered', false)) return;
+    if ($('.modal.is-open') || $('#lightbox.is-open') || $('#mobileMenu.is-open')) return;
+    openContact({ focus: false });
+  }
+  setTimeout(maybeAutoContact, 10000);
+  document.addEventListener('mouseout', (e) => { if (!e.relatedTarget && e.clientY < 10) maybeAutoContact(); });
 
   /* ------------------------------------------------------------------ *
    * Gallery + lightbox
