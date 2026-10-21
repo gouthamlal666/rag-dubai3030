@@ -20,11 +20,11 @@ window.RAG_CONFIG = {
     Evening: { label: 'Evening', labelAr: 'مساءً', time: '6:30 – 7:15 PM', timeAr: '6:30 – 7:15 م', start: '18:30', end: '19:15', icon: 'moon' },
   },
 
-  // Status values used in the spreadsheet → how they look on the site.
+  // Public session status. A session with an activity is "Scheduled";
+  // a slot without one shows "Details soon".
   statuses: {
-    Confirmed: { label: 'Confirmed', labelAr: 'مؤكدة', dot: 'bg-emerald-400', chip: 'bg-emerald-400/15 text-emerald-300 ring-emerald-400/30' },
-    Tentative: { label: 'Tentative', labelAr: 'مبدئية', dot: 'bg-amber-400', chip: 'bg-amber-400/15 text-amber-300 ring-amber-400/30' },
-    Available: { label: 'Available', labelAr: 'متاحة', dot: 'bg-sky-400', chip: 'bg-sky-400/15 text-sky-300 ring-sky-400/30' },
+    Scheduled: { label: 'Scheduled', labelAr: 'مجدولة', dot: 'bg-emerald-400', chip: 'bg-emerald-400/15 text-emerald-300 ring-emerald-400/30' },
+    Pending: { label: 'Details soon', labelAr: 'التفاصيل قريباً', dot: 'bg-sky-400', chip: 'bg-sky-400/15 text-sky-300 ring-sky-400/30' },
   },
 
   // Image + description per activity. Unknown activities fall back to "default".
@@ -44,31 +44,33 @@ window.RAG_CONFIG = {
     'Magnetic Healing': {
       nameAr: 'العلاج المغناطيسي',
       image: 'https://images.unsplash.com/photo-1600618528240-fb9fc964b853?auto=format&fit=crop&w=900&q=70',
-      blurb: 'A calming, restorative energy session to release stress and recharge.',
-      blurbAr: 'جلسة طاقة مهدّئة ومجدِّدة للتخلص من التوتر واستعادة النشاط.',
+      blurb: 'A calm, guided session built around relaxation.',
+      blurbAr: 'جلسة هادئة وموجّهة تتمحور حول الاسترخاء.',
     },
     'Mat Pilates': {
       nameAr: 'بيلاتس الحصيرة',
       image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=900&q=70',
-      blurb: 'Core-focused mat work for posture, stability and long, lean strength.',
-      blurbAr: 'تمارين على الحصيرة تركّز على عضلات الجذع لتحسين القوام والثبات والقوة.',
+      blurb: 'Mat work focused on core strength, posture and stability.',
+      blurbAr: 'تمارين على الحصيرة تركّز على قوة الجذع والقوام والثبات.',
     },
     'Dance Fitness': {
       nameAr: 'رقص اللياقة',
       image: 'https://images.unsplash.com/photo-1524594152303-9fd13543fe6e?auto=format&fit=crop&w=900&q=70',
-      blurb: 'High-energy cardio set to music — no dance experience needed.',
-      blurbAr: 'تمارين كارديو مليئة بالطاقة على أنغام الموسيقى — لا تحتاج إلى خبرة في الرقص.',
+      blurb: 'High-energy cardio set to music. No dance experience needed.',
+      blurbAr: 'تمارين كارديو مليئة بالطاقة على أنغام الموسيقى. لا تحتاج إلى خبرة في الرقص.',
     },
     default: {
       nameAr: 'قريباً',
       image: 'https://images.unsplash.com/photo-1599058917212-d750089bc07e?auto=format&fit=crop&w=900&q=70',
-      blurb: 'A new session is being lined up. Register to be the first to know.',
-      blurbAr: 'نجهّز جلسة جديدة. سجّل لتكون أول من يعلم.',
+      blurb: 'Session details will be announced soon.',
+      blurbAr: 'سيتم الإعلان عن تفاصيل الجلسة قريباً.',
     },
   },
 };
 
 /* Sessions taken from the instructor planning sheet.
+   - The sheet's "status" column is kept for reference; the page shows "Scheduled"
+     for any slot with an activity and "Details soon" otherwise.
    - activity / instructor left empty → shown as "Coming soon" / "To be announced".
    - Dates with no row are filled in automatically as open "Available" slots. */
 window.RAG_SESSIONS = [
@@ -104,51 +106,60 @@ window.RAG_SESSIONS = [
    and the hero headline + intro text. heading/headingAr may contain HTML. */
 window.RAG_HERO_SLIDES = [
   { image: 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=1400&q=75',
-    eyebrow: 'Free · All levels', title: 'Morning & evening sessions',
-    eyebrowAr: 'مجاني · لجميع المستويات', titleAr: 'جلسات صباحية ومسائية',
-    heading: 'What\'s your <span class="text-gold-gradient">30x30?</span><br />Start it at <span class="text-gold-gradient">RAG Biz HQ</span>',
-    lead: '30 minutes of activity, 30 days in a row. From <strong class="text-white">31 October to 29 November</strong>, RAG Holdings opens its Biz HQ on Sheikh Zayed Road for free morning and evening sessions. Everyone in Dubai is welcome.',
-    headingAr: 'ما هو <span class="text-gold-gradient">30×30</span> الخاص بك؟<br />ابدأه في <span class="text-gold-gradient" dir="ltr">RAG Biz HQ</span>',
-    leadAr: '30 دقيقة من النشاط، 30 يوماً متتالية. من <strong class="text-white">31 أكتوبر إلى 29 نوفمبر</strong>، تفتح RAG القابضة مقرها في شارع الشيخ زايد لجلسات مجانية صباحية ومسائية. الجميع في دبي مرحّب بهم.' },
+    eyebrow: 'Daily sessions', title: 'Morning and evening sessions',
+    eyebrowAr: 'جلسات يومية', titleAr: 'جلسات صباحية ومسائية',
+    heading: '<span class="text-gold-gradient">Dubai 30x30</span><br />Hosted at<br /><span class="text-gold-gradient">RAG Biz HQ</span>',
+    lead: '30 minutes of activity a day, for 30 days. Sessions run from 31 October to 29 November in the RAG Biz HQ Community Arena on Sheikh Zayed Road.',
+    headingAr: '<span class="text-gold-gradient">دبي 30×30</span><br />تستضيفه<br /><span class="text-gold-gradient" dir="ltr">RAG Biz HQ</span>',
+    leadAr: '30 دقيقة من النشاط يومياً لمدة 30 يوماً. تُقام الجلسات من 31 أكتوبر إلى 29 نوفمبر في الساحة المجتمعية لـ RAG Biz HQ في شارع الشيخ زايد.' },
   { image: 'assets/img/gallery/RAG00584.webp',
     eyebrow: 'The venue', title: 'RAG Biz HQ, Sheikh Zayed Road',
     eyebrowAr: 'المكان', titleAr: 'RAG Biz HQ، شارع الشيخ زايد',
-    heading: 'A premium venue<br /><span class="text-gold-gradient">for your 30x30</span>',
-    lead: 'Our flagship business centre on Sheikh Zayed Road becomes a community fitness space for 30 days — central, comfortable and open to everyone.',
-    headingAr: 'مكان متميز<br /><span class="text-gold-gradient">لتحدي 30×30</span>',
-    leadAr: 'يتحول مركز أعمالنا الرئيسي في شارع الشيخ زايد إلى مساحة لياقة مجتمعية لمدة 30 يوماً — موقع مركزي ومريح ومفتوح للجميع.' },
+    heading: 'The RAG Biz HQ<br /><span class="text-gold-gradient">Community Arena</span>',
+    lead: 'RAG Biz HQ, our business centre on Sheikh Zayed Road, hosts fitness and wellness sessions for 30 days.',
+    headingAr: '<span class="text-gold-gradient" dir="ltr">RAG Biz HQ</span><br /><span class="text-gold-gradient">الساحة المجتمعية</span>',
+    leadAr: 'يستضيف RAG Biz HQ، مركز أعمالنا في شارع الشيخ زايد، جلسات لياقة وعافية لمدة 30 يوماً.' },
   { image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1400&q=75',
     eyebrow: 'Yoga', title: 'Flow into your day',
     eyebrowAr: 'يوغا', titleAr: 'ابدأ يومك بانسيابية',
-    heading: 'Sunrise yoga,<br /><span class="text-gold-gradient">every morning</span>',
-    lead: 'Start your day with a guided yoga flow before work. All levels welcome — just bring yourself and a water bottle.',
-    headingAr: 'يوغا الصباح،<br /><span class="text-gold-gradient">كل يوم</span>',
-    leadAr: 'ابدأ يومك بجلسة يوغا موجّهة قبل العمل. مرحّب بجميع المستويات — فقط أحضر نفسك وزجاجة ماء.' },
+    heading: 'Morning yoga<br /><span class="text-gold-gradient">at RAG Biz HQ</span>',
+    lead: 'Guided yoga sessions are on the morning calendar. Each one is led by an independent instructor.',
+    headingAr: 'يوغا الصباح<br /><span class="text-gold-gradient">في <span dir="ltr">RAG Biz HQ</span></span>',
+    leadAr: 'جلسات يوغا موجّهة ضمن جدول الصباح، يقود كل جلسة منها مدرّب مستقل.' },
   { image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1400&q=75',
-    eyebrow: 'Mat Pilates', title: 'Build real core strength',
-    eyebrowAr: 'بيلاتس الحصيرة', titleAr: 'قوِّ عضلات الجذع',
-    heading: 'Build strength<br /><span class="text-gold-gradient">from the core</span>',
-    lead: 'Mat Pilates sessions focused on posture, stability and long, lean strength — led by experienced instructors.',
-    headingAr: 'ابنِ قوتك<br /><span class="text-gold-gradient">من الجذع</span>',
-    leadAr: 'جلسات بيلاتس على الحصيرة تركّز على القوام والثبات والقوة — بإشراف مدرّبين ذوي خبرة.' },
+    eyebrow: 'Mat Pilates', title: 'Core strength on the mat',
+    eyebrowAr: 'بيلاتس الحصيرة', titleAr: 'قوة الجذع على الحصيرة',
+    heading: 'Mat Pilates<br /><span class="text-gold-gradient">in the Arena</span>',
+    lead: 'Mat Pilates sessions focus on core strength, posture and stability. An independent instructor leads each one.',
+    headingAr: 'بيلاتس الحصيرة<br /><span class="text-gold-gradient">في الساحة</span>',
+    leadAr: 'تركّز جلسات بيلاتس الحصيرة على قوة الجذع والقوام والثبات، ويقود كل جلسة مدرّب مستقل.' },
   { image: 'https://images.unsplash.com/photo-1524594152303-9fd13543fe6e?auto=format&fit=crop&w=1400&q=75',
     eyebrow: 'Dance Fitness', title: 'Cardio set to music',
     eyebrowAr: 'رقص اللياقة', titleAr: 'كارديو على أنغام الموسيقى',
-    heading: 'Move to<br /><span class="text-gold-gradient">the music</span>',
-    lead: 'High-energy dance fitness in the evenings. No dance experience needed — just bring your energy and your friends.',
-    headingAr: 'تحرّك على<br /><span class="text-gold-gradient">أنغام الموسيقى</span>',
-    leadAr: 'رقص لياقة مليء بالطاقة في المساء. لا تحتاج إلى خبرة — فقط أحضر طاقتك وأصدقاءك.' },
+    heading: 'Dance fitness<br /><span class="text-gold-gradient">in the evening</span>',
+    lead: 'High-energy dance fitness sessions are on the evening calendar. No dance experience is needed.',
+    headingAr: 'رقص اللياقة<br /><span class="text-gold-gradient">في المساء</span>',
+    leadAr: 'جلسات رقص لياقة مليئة بالطاقة ضمن جدول المساء. لا تحتاج إلى أي خبرة في الرقص.' },
   { image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1400&q=75',
-    eyebrow: 'Wellness', title: 'Breathe, reset, recharge',
-    eyebrowAr: 'العافية', titleAr: 'تنفّس، استرخِ، استعد طاقتك',
-    heading: 'Breathe. Reset.<br /><span class="text-gold-gradient">Recharge.</span>',
-    lead: 'Wellness, breathwork and mindfulness sessions to unwind after work and bring balance back to your week.',
-    headingAr: 'تنفّس. استرخِ.<br /><span class="text-gold-gradient">استعد طاقتك.</span>',
-    leadAr: 'جلسات عافية وتنفس وتأمل للاسترخاء بعد العمل واستعادة التوازن في أسبوعك.' },
+    eyebrow: 'Wellness', title: 'Breathe and reset after work',
+    eyebrowAr: 'العافية', titleAr: 'تنفّس واسترخِ بعد العمل',
+    heading: 'Wellness<br /><span class="text-gold-gradient">after work</span>',
+    lead: 'Wellness sessions cover mindfulness, breathwork and recovery. They run in the evening slot.',
+    headingAr: 'العافية<br /><span class="text-gold-gradient">بعد العمل</span>',
+    leadAr: 'تشمل جلسات العافية التأمل وتمارين التنفس والاستشفاء، وتُقام في الفترة المسائية.' },
 ];
 
 /* RAG Biz HQ gallery */
 window.RAG_GALLERY = [
+  // RAG Community Arena — events hosted at RAG Biz HQ
+  { src: 'assets/img/gallery/arena-rcb-entrance.webp',    title: 'RCB Fan Army UAE at RAG Biz HQ',        titleAr: 'RCB Fan Army UAE في RAG Biz HQ',            category: 'RAG Community Arena' },
+  { src: 'assets/img/gallery/arena-nikon-workshop.webp',  title: 'RAG Club × Nikon School workshop',      titleAr: 'ورشة RAG Club × Nikon School',              category: 'RAG Community Arena' },
+  { src: 'assets/img/gallery/arena-rcb-anniversary.webp', title: 'RCB Fan Army UAE 1st anniversary',      titleAr: 'الذكرى الأولى لـ RCB Fan Army UAE',          category: 'RAG Community Arena' },
+  { src: 'assets/img/gallery/arena-nikon-photowalk.webp', title: 'Nikon School photographers at RAG',     titleAr: 'مصورو Nikon School في RAG',                 category: 'RAG Community Arena' },
+  { src: 'assets/img/gallery/arena-rcb-guests.webp',      title: 'Guests of honour',                      titleAr: 'ضيوف الشرف',                                category: 'RAG Community Arena' },
+  { src: 'assets/img/gallery/arena-rcb-audience.webp',    title: 'Community meet in the Arena',           titleAr: 'لقاء مجتمعي في الساحة',                      category: 'RAG Community Arena' },
+
+  // RAG Biz HQ spaces
   { src: 'assets/img/gallery/RAG00584.webp', title: 'Grand Reception',         titleAr: 'الاستقبال الرئيسي',  category: 'Reception' },
   { src: 'assets/img/gallery/RAG00578.webp', title: 'Community Hub',           titleAr: 'المساحة المجتمعية',  category: 'Community' },
   { src: 'assets/img/gallery/RAG00577.webp', title: 'Executive Lounge',        titleAr: 'صالة كبار التنفيذيين', category: 'Lounges' },

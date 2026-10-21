@@ -30,8 +30,6 @@
     clock: '<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
     pin: '<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 1114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>',
     arrow: '<svg class="flip-rtl h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
-    check: '<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>',
-    cal: '<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M12 14v4M10 16h4"/></svg>',
     chevL: '<svg class="flip-rtl h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>',
     chevR: '<svg class="flip-rtl h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>',
     expand: '<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>',
@@ -250,7 +248,8 @@
         slot,
         activity: (row.activity || '').trim(),
         instructor: (row.instructor || '').trim(),
-        status: CFG.statuses[row.status] ? row.status : 'Available',
+        // Public status: a session with an activity is "Scheduled"; open slots show "Details soon".
+        status: (row.activity || '').trim() ? 'Scheduled' : 'Pending',
         past: d < today,
       });
     });
@@ -279,7 +278,6 @@
   const imgTag = (s, cls = '') =>
     `<img src="${esc(info(s).image)}" alt="${esc(title(s))}" loading="lazy" class="${cls} ${s.activity ? '' : 'tba-img'}" onerror="this.onerror=null;this.src='assets/img/gallery/RAG00578.webp'" />`;
 
-  const reserved = new Set(store.get('rag3030-reserved', []));
 
   /* ------------------------------------------------------------------ *
    * Schedule state + filters
@@ -360,12 +358,7 @@
    * Renderers
    * ------------------------------------------------------------------ */
   function cardHTML(s) {
-    const isRes = reserved.has(s.id);
-    const cta = s.past
-      ? `<span class="text-xs font-medium text-white/40">${esc(ui('ended'))}</span>`
-      : isRes
-        ? `<span class="inline-flex items-center gap-1.5 text-sm font-bold text-emerald-300">${icons.check}${esc(ui('reserved'))}</span>`
-        : `<span class="inline-flex items-center gap-1.5 text-sm font-bold text-gold-300">${esc(s.activity ? ui('reserve') : ui('notify'))}${icons.arrow}</span>`;
+    const cta = `<span class="inline-flex items-center gap-1.5 text-sm font-bold text-gold-300">${esc(ui('viewDetails'))}${icons.arrow}</span>`;
     return `
       <button type="button" class="session-card ${s.past ? 'is-past' : ''} ${state.selected === s.id ? 'is-selected' : ''}" data-session="${s.id}" aria-label="${esc(title(s))}, ${esc(longDate(s))}, ${esc(slotLabel(s))}">
         <div class="session-media">
@@ -447,7 +440,7 @@
                   <span class="mt-1.5 block truncate font-display text-xl font-bold uppercase italic ${s.activity ? '' : 'text-white/60'}">${esc(title(s))}</span>
                   <span class="block truncate text-sm text-white/60">${esc(s.instructor || ui('instructorTba'))}</span>
                 </span>
-                <span class="flex flex-col items-end gap-2">${statusChip(s)}${reserved.has(s.id) ? `<span class="text-xs font-bold text-emerald-300">${esc(ui('reserved'))}</span>` : ''}</span>
+                <span class="flex flex-col items-end gap-2">${statusChip(s)}</span>
               </button>`).join('')}
           </div>
         </div>`;
@@ -458,7 +451,6 @@
     const s = sessions.find((x) => x.id === state.selected);
     if (!s) return;
     const idx = sessions.indexOf(s);
-    const isRes = reserved.has(s.id);
     $('#spotlight').innerHTML = `
       <div class="grid lg:grid-cols-5">
         <div class="spot-media lg:col-span-3">
@@ -486,13 +478,8 @@
             <div class="flex items-center gap-3 text-white/75"><span class="spot-ico">${icons.clock}</span><dd>${esc(slotLabel(s))} · <bdi>${esc(slotTime(s))}</bdi></dd></div>
             <div class="flex items-center gap-3 text-white/75"><span class="spot-ico">${icons.pin}</span><dd>${esc(isAr() ? CFG.venueAr : CFG.venue)}</dd></div>
           </dl>
-          <div class="mt-auto grid gap-3 pt-7 sm:grid-cols-2">
-            ${s.past
-              ? `<span class="btn-ghost justify-center opacity-60">${esc(ui('ended'))}</span>`
-              : isRes
-                ? `<span class="btn-ghost justify-center border-emerald-400/40 text-emerald-300">${icons.check} ${esc(ui('reserved'))}</span>`
-                : `<button class="btn-gold justify-center" data-book="${s.id}">${esc(s.activity ? ui('reserveFree') : ui('notify'))} ${icons.arrow}</button>`}
-            <button class="btn-ghost justify-center" data-ics="${s.id}">${icons.cal} ${esc(ui('addCal'))}</button>
+          <div class="mt-auto pt-7">
+            <button class="btn-gold w-full justify-center sm:w-auto" data-details="${s.id}">${esc(ui('viewDetails'))} ${icons.arrow}</button>
           </div>
         </div>
       </div>`;
@@ -505,7 +492,7 @@
     const list = filtered({ ignoreWeek: state.view === 'month' });
     ['cards', 'month', 'list'].forEach((v) => $(`#view-${v}`).classList.toggle('hidden', state.view !== v || (v !== 'month' && !list.length)));
     $('#emptyState').classList.toggle('hidden', !!list.length);
-    $('#resultCount').innerHTML = ui('showing')(list.length, list.filter((s) => s.status === 'Confirmed').length);
+    $('#resultCount').innerHTML = ui('showing')(list.length, list.filter((s) => s.status === 'Scheduled').length);
 
     if (state.view === 'cards') renderCards(list);
     else if (state.view === 'month') renderMonth(list);
@@ -522,16 +509,14 @@
 
   function initSchedule() {
     initFilters();
-    const next = sessions.find((s) => !s.past && s.status === 'Confirmed' && s.activity) || sessions.find((s) => !s.past) || sessions[0];
+    const next = sessions.find((s) => !s.past && s.status === 'Scheduled') || sessions.find((s) => !s.past) || sessions[0];
     state.selected = next.id;
     renderSpotlight();
     renderSchedule();
 
     document.addEventListener('click', (e) => {
-      const book = e.target.closest('[data-book]');
-      if (book) { openBooking(book.dataset.book); return; }
-      const ics = e.target.closest('[data-ics]');
-      if (ics) { downloadICS(sessions.find((s) => s.id === ics.dataset.ics)); return; }
+      const details = e.target.closest('[data-details]');
+      if (details) { openDetails(details.dataset.details); return; }
       const step = e.target.closest('[data-spot-step]');
       if (step) {
         const idx = sessions.findIndex((s) => s.id === state.selected) + Number(step.dataset.spotStep);
@@ -539,48 +524,20 @@
         return;
       }
       const card = e.target.closest('[data-session]');
-      if (card && $('#schedule').contains(card)) { selectSession(card.dataset.session); return; }
+      if (card && $('#schedule').contains(card)) { openDetails(card.dataset.session); return; }
       const day = e.target.closest('[data-day]');
       if (day) {
         const s = filtered({ ignoreWeek: true }).find((x) => x.date === day.dataset.day) || sessions.find((x) => x.date === day.dataset.day);
-        if (s) selectSession(s.id);
+        if (s) openDetails(s.id);
       }
     });
     document.addEventListener('keydown', (e) => {
-      if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('.mini-session')) { e.preventDefault(); selectSession(e.target.dataset.session); }
+      if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('.mini-session')) { e.preventDefault(); openDetails(e.target.dataset.session); }
     });
   }
 
   /* ------------------------------------------------------------------ *
-   * Calendar file (.ics)
-   * ------------------------------------------------------------------ */
-  function downloadICS(s) {
-    if (!s) return;
-    const st = CFG.slots[s.slot];
-    const stamp = (iso, hm) => `${iso.replace(/-/g, '')}T${hm.replace(':', '')}00`;
-    const name = s.activity || 'Fitness session';
-    const ics = [
-      'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//RAG Holdings//Dubai 30x30//EN',
-      'BEGIN:VEVENT',
-      `UID:${s.id}@ragbizhq-3030`,
-      `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z`,
-      `DTSTART;TZID=Asia/Dubai:${stamp(s.date, st.start)}`,
-      `DTEND;TZID=Asia/Dubai:${stamp(s.date, st.end)}`,
-      `SUMMARY:${name} @ RAG Biz HQ — Dubai 30x30`,
-      `DESCRIPTION:${st.label} session${s.instructor ? ' with ' + s.instructor : ''}. Day ${s.dayNo} of the Dubai Fitness Challenge.`,
-      `LOCATION:${CFG.venue.replace(/,/g, '\\,')}`,
-      'END:VEVENT', 'END:VCALENDAR',
-    ].join('\r\n');
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }));
-    a.download = `rag-3030-${s.id}.ics`;
-    document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
-    toast(ui('toastCal'));
-  }
-
-  /* ------------------------------------------------------------------ *
-   * Modals (promo + booking)
+   * Modals (promo, contact, session details)
    * ------------------------------------------------------------------ */
   let lastFocus = null;
   const lockScroll = () => { document.body.classList.add('modal-open'); scroller() && scroller().lock(); };
@@ -618,40 +575,31 @@
     }
   }));
 
-  let bookingId = null;
-  function openBooking(id) {
+  // Session detail window (opens from "View details", cards, list rows and the calendar)
+  function openDetails(id) {
     const s = sessions.find((x) => x.id === id); if (!s) return;
-    bookingId = id;
-    $('#bookingHeader').innerHTML = `
-      <div class="relative h-44 overflow-hidden rounded-t-[1.75rem]">
+    state.selected = id;
+    renderSpotlight();
+    $$('.session-card').forEach((c) => c.classList.toggle('is-selected', c.dataset.session === id));
+    $('#sessionHeader').innerHTML = `
+      <div class="relative h-48 overflow-hidden rounded-t-[1.75rem]">
         ${imgTag(s, 'absolute inset-0 h-full w-full object-cover')}
         <div class="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/60 to-transparent"></div>
+        <div class="absolute top-4 flex gap-2 ltr:left-6 rtl:right-6">${slotChip(s)}${statusChip(s)}</div>
         <div class="absolute bottom-4 left-6 right-6">
-          <p class="text-xs font-medium uppercase tracking-[.2em] text-gold-300">${esc(longDate(s))} · <bdi>${esc(slotTime(s))}</bdi></p>
-          <h2 id="bookingTitle" class="mt-1 font-display text-4xl font-bold uppercase italic leading-none">${esc(title(s))}</h2>
-          <p class="mt-1 text-sm text-white/70">${s.instructor ? `${esc(ui('with'))} ${esc(s.instructor)}` : esc(ui('instructorTba'))}</p>
+          <p class="text-xs font-medium uppercase tracking-[.2em] text-gold-300">${esc(longDate(s))} · ${esc(ui('dayOf')(s.dayNo))}</p>
+          <h2 id="sessionTitle" class="mt-1 font-display text-4xl font-bold uppercase italic leading-none">${esc(title(s))}</h2>
         </div>
       </div>`;
-    $('#bookingSubmit').textContent = s.activity ? ui('reserveMine') : ui('notifyConfirmed');
-    $('#bookingForm').classList.remove('hidden');
-    $('#bookingSuccess').classList.add('hidden');
-    const saved = store.get('rag3030-profile', {});
-    if (saved.name) $('#b-name').value = saved.name;
-    if (saved.phone) $('#b-phone').value = saved.phone;
-    openModal($('#booking'));
+    $('#sessionBody').innerHTML = `
+      <p class="text-sm leading-relaxed text-white/70">${esc(blurb(s))}</p>
+      <dl class="mt-6 space-y-3 text-sm">
+        <div class="flex items-center gap-3"><span class="avatar ${s.instructor ? '' : 'is-empty'}">${esc(initials(s.instructor))}</span><span><dt class="text-[10px] font-medium uppercase tracking-widest text-white/40">${esc(ui('instructor'))}</dt><dd class="font-bold">${esc(s.instructor || ui('tba'))}</dd></span></div>
+        <div class="flex items-center gap-3 text-white/75"><span class="spot-ico">${icons.clock}</span><dd>${esc(slotLabel(s))} · <bdi>${esc(slotTime(s))}</bdi></dd></div>
+        <div class="flex items-center gap-3 text-white/75"><span class="spot-ico">${icons.pin}</span><dd>${esc(isAr() ? CFG.venueAr : CFG.venue)}</dd></div>
+      </dl>`;
+    openModal($('#sessionModal'));
   }
-  $('#bookingForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    if (!validate(e.target)) return;
-    store.set('rag3030-profile', { name: $('#b-name').value.trim(), phone: $('#b-phone').value.trim() });
-    reserved.add(bookingId);
-    store.set('rag3030-reserved', [...reserved]);
-    // TODO: send booking to your backend / CRM here.
-    $('#bookingForm').classList.add('hidden');
-    $('#bookingSuccess').classList.remove('hidden');
-    renderSpotlight(); renderSchedule();
-  });
-  $('#addToCalendar').addEventListener('click', () => downloadICS(sessions.find((s) => s.id === bookingId)));
 
   // Marketing popup — once per browser session, after a delay or on exit intent.
   function maybeShowPromo() {
