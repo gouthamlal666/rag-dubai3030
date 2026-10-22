@@ -111,6 +111,13 @@ window.RAG_I18N = {
 
     'b.done': 'تم',
     'b.close': 'إغلاق',
+    'loc.eyebrow': 'الموقع',
+    'loc.title': 'تجدنا في <span class="text-gold-gradient">شارع الشيخ زايد</span>',
+    'loc.p': 'زورونا في RAG Biz HQ في مبنى الديار، شارع الشيخ زايد، الوصل، دبي.',
+    'loc.addr': 'العنوان',
+    'loc.addrv': 'RAG Biz HQ، مبنى الديار، شارع الشيخ زايد، الوصل، دبي، الإمارات العربية المتحدة',
+    'loc.dir': 'احصل على الاتجاهات',
+    'loc.open': 'افتح في خرائط Google',
     'cq.call': 'اتصال',
     'cq.wa': 'واتساب',
     'cq.email': 'البريد',

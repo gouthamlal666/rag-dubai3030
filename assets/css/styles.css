@@ -541,3 +541,11 @@ html:has(.legal-page) { scroll-behavior: smooth; }
 .legal-list--defs span { display: block; margin-top: .25rem; }
 .legal-contact { margin-top: 2.5rem; padding: 1.75rem; border-radius: 1.5rem; border: 1px solid rgba(212,168,75,.3); background: linear-gradient(160deg, rgba(212,168,75,.1), rgba(255,255,255,.02)); }
 .legal-contact a { text-decoration: none; }
+
+/* ---------- Location map ---------- */
+.map-frame {
+  position: relative; overflow: hidden; border-radius: 1.5rem; padding: 2px;
+  background: linear-gradient(135deg, rgba(229,191,102,.7), rgba(229,191,102,.08) 40%, rgba(229,191,102,.08) 60%, rgba(229,191,102,.55));
+  box-shadow: 0 30px 70px -35px rgba(0,0,0,.8);
+}
+.map-frame iframe { display: block; border-radius: calc(1.5rem - 2px); background: #0B1F45; }
