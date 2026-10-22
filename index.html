@@ -638,15 +638,15 @@
                 <p class="field-error" data-i18n="f.emailErr">Please enter a valid email.</p>
               </div>
 
-              <fieldset class="sm:col-span-2 mt-1">
-                <legend class="field-label" data-i18n="f.enquiry">Enquiry type</legend>
-                <div class="flex flex-wrap gap-2">
-                  <label class="chip-radio"><input type="radio" name="topic" value="visit" checked /><span data-i18n="f.e1">Book a visit to RAG Biz HQ</span></label>
-                  <label class="chip-radio"><input type="radio" name="topic" value="office" /><span data-i18n="f.e2">Office space details</span></label>
-                  <label class="chip-radio"><input type="radio" name="topic" value="setup" /><span data-i18n="f.e3">Business setup with RAG</span></label>
-                  <label class="chip-radio"><input type="radio" name="topic" value="general" /><span data-i18n="f.e4">General enquiry</span></label>
-                </div>
-              </fieldset>
+              <div class="fl fl-select sm:col-span-2">
+                <select id="modal-topic" name="topic" class="field fl-input">
+                  <option value="visit" data-i18n="f.e1">Book a visit to RAG Biz HQ</option>
+                  <option value="office" data-i18n="f.e2">Office space details</option>
+                  <option value="setup" data-i18n="f.e3">Business setup with RAG</option>
+                  <option value="general" data-i18n="f.e4">General enquiry</option>
+                </select>
+                <label for="modal-topic" class="fl-label" data-i18n="f.enquiry">Enquiry type</label>
+              </div>
 
               <div class="fl sm:col-span-2">
                 <textarea id="modal-message" name="message" rows="3" required class="field fl-input resize-none" placeholder=" "></textarea>

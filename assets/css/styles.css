@@ -427,17 +427,11 @@ textarea.fl-input { padding-top: 1.7rem; min-height: 7.25rem; }
 .fl .field.has-error ~ .field-error { display: block; }
 [dir="rtl"] .fl-input[dir="ltr"] { text-align: right; }
 
-/* Enquiry type as selectable chips */
-.chip-radio { position: relative; cursor: pointer; }
-.chip-radio input { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
-.chip-radio span {
-  display: inline-flex; align-items: center; padding: .55rem .95rem; border-radius: 9999px;
-  border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.04);
-  font-size: .82rem; font-weight: 600; color: rgba(255,255,255,.75); transition: all .2s ease;
-}
-.chip-radio:hover span { border-color: var(--gold-400); color: #fff; }
-.chip-radio input:checked + span { background: var(--gold-grad); color: var(--navy-950); border-color: transparent; box-shadow: 0 8px 22px -10px rgba(212,168,75,.7); }
-.chip-radio input:focus-visible + span { outline: 2px solid var(--gold-400); outline-offset: 2px; }
+/* Enquiry type dropdown: label always sits at the top, like a filled field */
+.fl-select .fl-label { top: .5rem; font-size: .66rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-300); }
+.fl-select select.fl-input { cursor: pointer; background-position: right 1rem center; }
+[dir="rtl"] .fl-select select.fl-input { background-position: left 1rem center; }
+.fl-select select.fl-input:hover { border-color: rgba(229,191,102,.55); }
 
 /* Success state: animated tick */
 .contact-success:not(.hidden) { display: flex; }
@@ -480,11 +474,6 @@ textarea.fl-input { padding-top: 1.7rem; min-height: 7.25rem; }
   .contact-main { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding: 1.1rem 1.25rem 0; }
   .contact-main .contact-form .grid { gap: .7rem; }
 
-  /* Enquiry types: one swipeable row instead of four stacked rows */
-  .contact-modal fieldset { min-width: 0; min-inline-size: 0; } /* fieldsets grow to fit content by default */
-  .contact-modal .chip-radio span { white-space: nowrap; padding: .5rem .85rem; font-size: .78rem; }
-  .contact-modal fieldset > .flex { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: -1.25rem; padding-inline: 1.25rem; padding-block: .15rem; }
-  .contact-modal fieldset > .flex::-webkit-scrollbar { display: none; }
   .contact-modal textarea.fl-input { min-height: 5.5rem; }
 
   /* Send button stays pinned at the bottom of the sheet */
