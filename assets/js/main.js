@@ -170,7 +170,7 @@
         const tag = i === 0 ? 'h1 id="heroTitle"' : 'h2';
         return `
         <div class="hero-copy-item ${i === current ? 'is-active' : ''}" ${i === current ? '' : 'aria-hidden="true"'}>
-          <${tag} class="font-display text-[2.4rem] font-extrabold uppercase italic leading-[1] sm:text-6xl lg:text-[4.9rem]">${isAr() ? s.headingAr || s.heading : s.heading}</${tag.split(' ')[0]}>
+          <${tag} class="font-display text-[2.4rem] font-extrabold uppercase leading-[1] sm:text-6xl lg:text-[4.9rem]">${isAr() ? s.headingAr || s.heading : s.heading}</${tag.split(' ')[0]}>
           <p class="${i === 0 ? 'hero-fade ' : ''}mt-6 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">${isAr() ? s.leadAr || s.lead : s.lead}</p>
         </div>`;
       }).join('');
@@ -413,7 +413,7 @@
         </div>
         <div class="flex flex-1 flex-col p-5">
           <p class="text-[11px] font-medium uppercase tracking-[.2em] text-gold-400">${esc(dayName(s.dateObj))} · <bdi>${esc(slotTime(s))}</bdi></p>
-          <h3 class="mt-1 font-display text-[1.7rem] font-bold uppercase italic leading-tight ${s.activity ? '' : 'text-white/60'}">${esc(title(s))}</h3>
+          <h3 class="mt-1 font-display text-[1.7rem] font-bold uppercase leading-tight ${s.activity ? '' : 'text-white/60'}">${esc(title(s))}</h3>
           <div class="mt-3 flex items-center gap-3">
             <span class="avatar ${s.instructor ? '' : 'is-empty'}">${esc(initials(s.instructor))}</span>
             <span class="min-w-0 text-sm leading-tight"><span class="block text-[10px] font-medium uppercase tracking-widest text-white/40">${esc(ui('instructor'))}</span><span class="block truncate font-bold ${s.instructor ? '' : 'text-white/50'}">${esc(s.instructor || ui('tba'))}</span></span>
@@ -456,7 +456,7 @@
     $('#view-month').innerHTML = `
       <div class="rounded-3xl border border-white/10 bg-navy-900/60 p-3 sm:p-5">
         <div class="mb-4 flex flex-wrap items-center justify-between gap-2 px-1">
-          <p class="font-display text-2xl font-bold uppercase italic">${ui('monthTitle')}</p>
+          <p class="font-display text-2xl font-bold uppercase">${ui('monthTitle')}</p>
           <p class="text-xs text-white/50 md:hidden">${esc(ui('tapDay'))}</p>
         </div>
         <div class="month-grid">${heads}${cells}</div>
@@ -471,7 +471,7 @@
       return `
         <div class="grid gap-3 border-b border-white/5 py-5 md:grid-cols-[10rem_1fr] md:gap-6">
           <div class="flex items-baseline gap-3 md:block">
-            <p class="font-display text-4xl font-bold italic leading-none">${d.getDate()} <span class="text-lg text-gold-400">${esc(monthShort(d))}</span></p>
+            <p class="font-display text-4xl font-bold leading-none">${d.getDate()} <span class="text-lg text-gold-400">${esc(monthShort(d))}</span></p>
             <p class="text-sm text-white/50 md:mt-1">${esc(dayName(d))} · ${esc(ui('day'))} ${items[0].dayNo}</p>
           </div>
           <div class="space-y-3">
@@ -480,7 +480,7 @@
                 ${imgTag(s, 'list-thumb', 200)}
                 <span class="min-w-0">
                   <span class="flex flex-wrap items-center gap-2">${slotChip(s)}<bdi class="text-xs text-white/50">${esc(slotTime(s))}</bdi></span>
-                  <span class="mt-1.5 block truncate font-display text-xl font-bold uppercase italic ${s.activity ? '' : 'text-white/60'}">${esc(title(s))}</span>
+                  <span class="mt-1.5 block truncate font-display text-xl font-bold uppercase ${s.activity ? '' : 'text-white/60'}">${esc(title(s))}</span>
                   <span class="block truncate text-sm text-white/60">${esc(s.instructor || ui('instructorTba'))}</span>
                 </span>
                 <span class="flex flex-col items-end gap-2">${statusChip(s)}</span>
@@ -514,7 +514,7 @@
             </div>
           </div>
           <p class="mt-5 text-xs font-medium uppercase tracking-[.25em] text-gold-400">${esc(longDate(s))}</p>
-          <h3 class="mt-1 font-display text-5xl font-bold uppercase italic leading-[.95] ${s.activity ? '' : 'text-white/70'}">${esc(title(s))}</h3>
+          <h3 class="mt-1 font-display text-5xl font-bold uppercase leading-[.95] ${s.activity ? '' : 'text-white/70'}">${esc(title(s))}</h3>
           <p class="mt-4 text-sm leading-relaxed text-white/65">${esc(blurb(s))}</p>
           <dl class="mt-6 space-y-3 text-sm">
             <div class="flex items-center gap-3"><span class="avatar ${s.instructor ? '' : 'is-empty'}">${esc(initials(s.instructor))}</span><span><dt class="text-[10px] font-medium uppercase tracking-widest text-white/40">${esc(ui('instructor'))}</dt><dd class="font-bold">${esc(s.instructor || ui('tba'))}</dd></span></div>
@@ -633,7 +633,7 @@
         <div class="absolute top-4 flex gap-2 ltr:left-6 rtl:right-6">${slotChip(s)}${statusChip(s)}</div>
         <div class="absolute bottom-4 left-6 right-6">
           <p class="text-xs font-medium uppercase tracking-[.2em] text-gold-300">${esc(longDate(s))} · ${esc(ui('dayOf')(s.dayNo))}</p>
-          <h2 id="sessionTitle" class="mt-1 font-display text-4xl font-bold uppercase italic leading-none">${esc(title(s))}</h2>
+          <h2 id="sessionTitle" class="mt-1 font-display text-4xl font-bold uppercase leading-none">${esc(title(s))}</h2>
         </div>
       </div>`;
     $('#sessionBody').innerHTML = `
@@ -698,7 +698,7 @@
     $('#galleryGrid').innerHTML = gallery.map((it, i) => `
       <button type="button" class="gal-item ${spans[i % spans.length]} ${galleryCat !== 'All' && it.category !== galleryCat ? 'is-hidden' : ''}" data-index="${i}" data-cat="${esc(it.category)}" aria-label="${esc(galTitle(it))}">
         <img src="${esc(it.src)}" alt="${esc(galTitle(it))} — RAG Biz HQ" loading="lazy" width="1024" height="683" />
-        <span class="cap"><span class="text-start"><span class="block text-[10px] font-bold uppercase tracking-[.2em] text-gold-300">${esc(catLabel(it.category))}</span><span class="block font-display text-2xl font-bold uppercase italic">${esc(galTitle(it))}</span></span>
+        <span class="cap"><span class="text-start"><span class="block text-[10px] font-bold uppercase tracking-[.2em] text-gold-300">${esc(catLabel(it.category))}</span><span class="block font-display text-2xl font-bold uppercase">${esc(galTitle(it))}</span></span>
         <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-gold-500 text-navy-950">${icons.expand}</span></span>
       </button>`).join('');
     window.RAG_MOTION && window.RAG_MOTION.reveal($$('.gal-item', $('#galleryGrid')));
