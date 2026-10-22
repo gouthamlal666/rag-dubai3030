@@ -111,6 +111,9 @@ window.RAG_I18N = {
 
     'b.done': 'تم',
     'b.close': 'إغلاق',
+    'cq.call': 'اتصال',
+    'cq.wa': 'واتساب',
+    'cq.email': 'البريد',
 
     'btn.contact': 'احجز زيارة',
     'nav.contact': 'تواصل معنا',
