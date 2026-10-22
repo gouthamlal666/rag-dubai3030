@@ -1,6 +1,7 @@
 /* RAG Biz HQ × Dubai 30x30 — custom styles (plain CSS, works with Tailwind CDN) */
 
-/* ---------- Fonts: Montserrat (Google Fonts) for Latin; Dubai Font as the Arabic fallback ---------- */
+/* ---------- Fonts: Montserrat, sans-serif. In Arabic, Dubai Font supplies the Arabic letters
+   (Montserrat has none); Latin words in Arabic mode still use Montserrat. ---------- */
 @font-face { font-family: "Dubai"; src: url("../fonts/Dubai-Light.woff2") format("woff2"); font-weight: 300; font-style: normal; font-display: swap; }
 @font-face { font-family: "Dubai"; src: url("../fonts/Dubai-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: "Dubai"; src: url("../fonts/Dubai-Medium.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
@@ -25,7 +26,8 @@ html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .lenis.lenis-stopped { overflow: hidden; }
 [data-lenis-prevent] { overscroll-behavior: contain; }
-body { overflow-x: hidden; font-family: "Montserrat", "Dubai", -apple-system, system-ui, "Segoe UI", Roboto, Arial, sans-serif; }
+body { overflow-x: hidden; font-family: "Montserrat", sans-serif; }
+[dir="rtl"] body, [dir="rtl"] .font-sans, [dir="rtl"] .font-display { font-family: "Montserrat", "Dubai", sans-serif; }
 body.modal-open { overflow: hidden; }
 section[id] { scroll-margin-top: 96px; }
 

@@ -8,8 +8,8 @@ module.exports = {
         gold: { 200: '#F8E7B5', 300: '#F1D58A', 400: '#E5BF66', 500: '#D4A84B', 600: '#B8862F', 700: '#8F6620' },
       },
       fontFamily: {
-        sans: ['Montserrat', 'Dubai', '-apple-system', 'system-ui', '"Segoe UI"', 'Roboto', 'Arial', 'sans-serif'],
-        display: ['Montserrat', 'Dubai', '-apple-system', 'system-ui', '"Segoe UI"', 'Roboto', 'Arial', 'sans-serif'],
+        sans: ['Montserrat', 'sans-serif'],
+        display: ['Montserrat', 'sans-serif'],
       },
       boxShadow: {
         gold: '0 10px 40px -10px rgba(212,168,75,.55)',
