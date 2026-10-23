@@ -128,29 +128,45 @@
   gsap.to('#heroBg', { yPercent: 18, ease: 'none', force3D: true, scrollTrigger: { trigger: '#home', start: 'top top', end: 'bottom top', scrub: true } });
 
   /* ---------------- Section reveals ---------------- */
+  // End states are explicit (fromTo): reading them from the page breaks on elements with
+  // CSS `transition: all` (e.g. contact rows), which then stayed invisible.
+  // Reveals start when the element actually scrolls into view. An IntersectionObserver
+  // doesn't depend on pre-measured scroll positions, so it can't get stuck when the page
+  // grows after load (calendar, gallery, map), which used to leave blank gaps on phones.
+  function onView(el, play) {
+    if (!('IntersectionObserver' in window)) return play();
+    const io = new IntersectionObserver((entries) => {
+      if (!entries.some((e) => e.isIntersecting)) return;
+      io.disconnect();
+      play();
+    }, { rootMargin: '0px 0px -12% 0px' });
+    io.observe(el);
+  }
+
   $$('[data-split]').forEach((el) => {
     if (el.id === 'heroTitle') return;
     const words = splitWords(el);
-    gsap.from(words, { yPercent: 115, rotate: 3, duration: 1.1, ease, stagger: 0.05, scrollTrigger: { trigger: el, start: 'top 85%', once: true } });
+    const tw = gsap.fromTo(words, { yPercent: 115, rotate: 3 }, { yPercent: 0, rotate: 0, duration: 1.1, ease, stagger: 0.05, paused: true });
+    onView(el, () => tw.play());
   });
 
   $$('[data-reveal]').forEach((el) => {
-    gsap.from(el, { y: 50, opacity: 0, duration: 1.1, ease, scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
+    const tw = gsap.fromTo(el, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 1.1, ease, paused: true });
+    onView(el, () => tw.play());
   });
 
   $$('[data-stagger]').forEach((el) => {
-    gsap.from(el.children, {
-      y: 60, opacity: 0, duration: 1, ease, stagger: 0.1,
-      scrollTrigger: { trigger: el, start: 'top 85%', once: true, onEnter: () => $$('[data-count]', el).forEach(countUp) },
-    });
+    const tw = gsap.fromTo(el.children, { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease, stagger: 0.1, paused: true });
+    onView(el, () => { tw.play(); $$('[data-count]', el).forEach(countUp); });
   });
 
   // Image curtain reveal: clip from below + slow zoom-out
   $$('[data-clip]').forEach((el) => {
     const img = $('img', el);
-    const t = gsap.timeline({ scrollTrigger: { trigger: el, start: 'top 85%', once: true } });
+    const t = gsap.timeline({ paused: true });
     t.fromTo(el, { clipPath: 'inset(100% 0% 0% 0% round 1.5rem)' }, { clipPath: 'inset(0% 0% 0% 0% round 1.5rem)', duration: 1.4, ease: 'expo.out' });
     if (img) t.fromTo(img, { scale: 1.35 }, { scale: 1, duration: 1.8, ease: 'expo.out' }, 0);
+    onView(el, () => t.play());
   });
 
   // Parallax layers
